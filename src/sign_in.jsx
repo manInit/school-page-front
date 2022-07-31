@@ -1,15 +1,17 @@
 import { useEffect } from "react";
+import { home_btn } from "./home";
 
 
-const sign_in = () =>{
+const Sign_in = () =>{
     useEffect(() => {
         document.title = `Авторизация`;
     })
     return(
         <>
-        
+            {home_btn}
+            
         </>
     )
 }
 
-export default sign_in
+export default Sign_in
