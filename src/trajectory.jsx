@@ -10,9 +10,14 @@ const Trajectory = (id) =>{
     })
     return(
         <>
+            <div className="head_wrap">
             {home_btn}
+            <div className="head_panel">
+
             {user_btn}
             {personal_space_btn}
+            </div>
+            </div>
         </>
     )
 }

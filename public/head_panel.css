@@ -1,0 +1,37 @@
+.head_panel{
+    /* position: absolute; */
+    margin: auto;
+    padding: 5px;
+    
+    /* display: inline-block; */
+    display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+    /* margin-left: 12%; */
+
+    width: 70%;
+    
+    /* background-color: rgba(44, 44, 44, 0.8); */
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.head_wrap{
+    display: flex;
+}
+
+.user_fi{
+    padding: 5px;
+    background-color: white;
+}
+
+.home_btn{
+    line-height: 25px;
+    text-align: center;
+    align-self: center;
+    text-align: center;
+    border: 1px solid black;
+    user-select: none;
+    display: inline-block;
+    aspect-ratio: 1;
+    width: 30px;
+}

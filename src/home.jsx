@@ -3,9 +3,12 @@ import { get_req } from "./utils/requests-api"
 // import '../public/grid.css'
 
 export const base_url = 'http://localhost:3000'
-export const home_btn = <input type="button" value='⌂' onClick={() => {window.location.href=base_url}}/>
-export const personal_space_btn = <input type='button' value='Личный кабинет' onClick={()=>{window.location.href=base_url+'/personal'}} />
-export const user_btn = <span>Имя Фамилия</span>
+// export const home_btn = <input type="button" value='⌂' className='home_btn' onClick={() => {window.location.href=base_url}}/>
+export const home_btn = <div value='⌂' className='home_btn' onClick={() => {window.location.href=base_url}}><span>⌂</span></div>
+export const personal_space_btn = <input type='button' value='Личный кабинет' style={{marginLeft: 'auto'}} onClick={()=>{window.location.href=base_url+'/personal'}} />
+export const user_btn = <span className="user_fi">Имя Фамилия</span>
+export const login_btn = <input type='button' value='Вход' onClick={()=>{window.location.href=base_url+'/login'}}/>
+export const register_btn = <input type='button' value='Регистрация' style={{marginLeft: 'auto'}} onClick={()=>{window.location.href=base_url+'/register'}}/>
 
 const Home = () =>{
     useEffect(() => {
@@ -14,9 +17,11 @@ const Home = () =>{
     const trajectories = [{},{},{},{},{},{},{},{},{},{}]//get_req('')
     return(
         <>
-            <input type='button' value='Вход' onClick={()=>{}}/>
-            <input type='button' value='Регистрация' onClick={()=>{window.location.href=base_url+'/register'}}/>
-            <div className="grid_container">
+            <div className="head_panel">
+                {login_btn}
+                {register_btn}
+            </div>
+             <div className="grid_container">
                 {trajectories.map(elem => (
                     trajectory_div(elem)
                 ))}

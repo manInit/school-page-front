@@ -9,9 +9,13 @@ const Personal = () =>{
     const trajectories = [{},{},{},{},{},{},{},{}]
     return(
         <>
+            <div className="head_wrap">
             {home_btn}
-            {user_btn}
-            <input type='button' value='Выход' onClick={()=>{}} />
+            <div className="head_panel">
+                {user_btn}
+                <input type='button' value='Выход'  style={{marginLeft: 'auto'}} onClick={()=>{}} />
+            </div>
+            </div>
             <div className="personal_trajectories">
                 {trajectories.map(elem =>(
                     trajectory_div(elem)    
