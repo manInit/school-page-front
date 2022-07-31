@@ -3,7 +3,6 @@
     margin: auto;
     margin-top: 100px;
     width: 70%;
-    padding-top: 200px;
     gap: 25px;
     /* grid-template-columns: auto auto auto; */
     grid-template-columns: repeat( auto-fill, minmax(200px, 1fr) );
@@ -14,7 +13,7 @@
 
 .grid_item {
     background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    /* border: 1px solid rgba(0, 0, 0, 0.8); */
     padding: 10px;
     font-size: 30px;
     width: 200px;
