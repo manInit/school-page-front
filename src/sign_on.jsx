@@ -24,7 +24,7 @@ const Sign_on = () =>{
         return a
     })()
     const [invalids, setInvalids] = useState(falses)    
-    console.log(invalids)      
+    // console.log(invalids)      
     const subtext = <span style={{color:'red', fontSize: '80%'}}>*недопустимый формат</span>
     const input_type = (type, name) =>{
         return <input type={type} name={name} onChange={e=>values[name]=e.target.value}/>
@@ -35,17 +35,8 @@ const Sign_on = () =>{
     const index_invalid = checkRegister(data)
       
     if(index_invalid[0] === undefined){
-        let json = {
-          name: data[0],
-          since_date: data[1],
-          to_date: data[2],
-          distance: data[3],
-          sex: data[4]==='М'? 1:0,
-          since_age: data[5],
-          to_age: data[6]
-        }
         // post_req('/api/competition', JSON.stringify(json))
-        console.log(JSON.stringify(json))
+        console.log(JSON.stringify(data))
         // window.close();
       }else{
         for(let i in data)
@@ -67,15 +58,8 @@ const Sign_on = () =>{
                 default: break
             }
         }
-            // if (data[i] === '')
-                // inds.push(i)
         // }
-        // if (!new RegExp('^[0-9]+$').test(data[3])) inds.push(3)
-        // else if (!new RegExp('^[0-9]+$').test(data[5])) inds.push(5)
         // else if (!new RegExp('^[0-9]+$').test(data[6])) inds.push(6)
-        //!new RegExp('^[a-zA-Zа-яА-Я]+$').test(data[i]) || 
-        // console.log(data)
-        // console.log(inds)
         return inds
       }
 
