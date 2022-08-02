@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import { home_btn } from "./home";
 
+const values = {
+    email: '',
+    password: ''
+}
+const falses = (()=>{
+    const a = []
+    for (let i in values)
+        a[i] = !!values[i]
+    return a
+})()
 
 const Sign_in = () =>{
     useEffect(() => {
         document.title = `Авторизация`;
     })
-    const values = {
-        email: '',
-        password: ''
-    }
-    const falses = (()=>{
-        const a = []
-        for (let i in values)
-            a[i] = !!values[i]
-        return a
-    })()
     const [invalids, setInvalids] = useState(falses)    
     // console.log(invalids)      
     const subtext = <span style={{color:'red', fontSize: '80%'}}>*недопустимый формат</span>
