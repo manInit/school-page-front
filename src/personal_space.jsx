@@ -17,6 +17,13 @@ const Personal = () =>{
                     <input type='button' value='Выход'  style={{marginLeft: 'auto'}} onClick={()=>{}} />
                 </div>
             </div>
+            <div className="personal_space_title">
+                <div className="personal_space_title_btn">Мероприятия</div>
+                <div className="personal_space_title_btn">Достижения</div>
+                <div className="personal_space_title_btn">Баллы</div>
+                <div className="personal_space_title_btn">Профиль</div>
+            </div>
+            
             <div className="personal_trajectories">
                 {trajectories.map(elem =>(
                     trajectory_div(elem)    
