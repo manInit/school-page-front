@@ -102,7 +102,7 @@ const Sign_on = () =>{
                     {line_field('Школа:','educationalOrganization', 'text')}
                     {line_field('Класс:','educationalClass', 'text')}
                     {line_field('Почта:','email', 'email')}
-                    {line_field('Телефон:','phone', 'tel')}
+                    {line_field('Телефон:','phoneNumber', 'tel')}
                     {line_check('Согласен на рабство в татарстане:','agreement1')}
                     {line_check('Завещаю жизнь волан-де-морту:','agreement2')}
                     <tr><td align="center" colSpan={2}><input type='button' value='Подтверждение' style={{display: 'inline-block', width:'100%'}} onClick={()=>register(values)}/></td></tr>

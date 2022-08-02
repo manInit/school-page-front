@@ -32,3 +32,9 @@
     margin-right: 5px;
     padding: 2px;
 }
+
+.content_container{
+    display: flex;
+    justify-content: center;
+
+}

@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { base_url, home_btn, under_line, uni_btn, user_btn } from "./home"
-//title="Личный кабинет"
+import { base_url, home_btn, bottom_info, uni_btn, user_btn } from "./home"
+import Profile from "./personal_components/profile";
 
 const Personal = () =>{
     useEffect(() => {
         document.title = `Личный кабинет`;
     })
+
     const trajectories = [{},{},{},{},{},{},{},{}]
     return(
         <>
@@ -23,13 +24,15 @@ const Personal = () =>{
                 <div className="personal_space_title_btn">Баллы</div>
                 <div className="personal_space_title_btn">Профиль</div>
             </div>
-            
-            <div className="personal_trajectories">
+            <div className="content_container">
+                <Profile />
+            </div>
+            <div className="personal_trajectories" hidden>
                 {trajectories.map(elem =>(
                     trajectory_div(elem)    
                 ))}
             </div>
-            {under_line}
+            {bottom_info}
         </>
     )
 }

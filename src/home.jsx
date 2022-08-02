@@ -11,7 +11,7 @@ export const personal_space_btn = <input type='button' value='Личный ка�
 export const user_btn = <span className="user_fi">Имя Фамилия</span>
 export const login_btn = <input type='button' value='Вход' onClick={()=>{window.location.href=base_url+'/login'}}/>
 export const register_btn = <input type='button' value='Регистрация' style={{marginLeft: 'auto'}} onClick={()=>{window.location.href=base_url+'/register'}}/>
-export const under_line = <div className="under_line">чё то там будет</div>
+export const bottom_info = <div className="under_line">чё то там будет</div>
 
 const Home = () =>{
     useEffect(() => {
@@ -30,7 +30,7 @@ const Home = () =>{
                     trajectory_div(elem)
                 ))}
             </div>
-            {under_line}
+            {bottom_info}
         </>
     )
 }

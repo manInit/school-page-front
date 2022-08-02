@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { home_btn, personal_space_btn, under_line, uni_btn, user_btn } from "./home"
+import { home_btn, personal_space_btn, bottom_info, uni_btn, user_btn } from "./home"
 import { get_req } from "./utils/requests-api"
 
 
@@ -19,7 +19,7 @@ const Trajectory = (id) =>{
                     {personal_space_btn}
                 </div>
             </div>
-            {under_line}
+            {bottom_info}
         </>
     )
 }
