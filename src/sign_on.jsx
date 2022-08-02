@@ -10,7 +10,9 @@ const values = {
     educationalOrganization: '',
     educationalClass: '',
     email: '',
-    phoneNumber: ''
+    phoneNumber: '',
+    agreement1: '',
+    agreement2: ''
 }
 const falses = (()=>{
     const a = []
@@ -27,8 +29,12 @@ const Sign_on = () =>{
     const [invalids, setInvalids] = useState(falses)    
     // console.log(invalids)      
     const subtext = <span style={{color:'red', fontSize: '80%'}}>*недопустимый формат</span>
+    const subtext_checkbox = <span style={{color:'red', fontSize: '80%'}}>*согласие</span>
     const input_type = (type, name) =>{
         return <input type={type} name={name} onChange={e=>{values[name]=e.target.value}}/>
+    }
+    const input_checkbox = (name) =>{
+        return <input type='checkbox' name={name} onChange={e=>{values[name]=e.target.checked}} />
     }
     
     const register = (data) =>{
@@ -48,6 +54,7 @@ const Sign_on = () =>{
     
     const checkRegister = (data) =>{
         let inds = []
+        console.log(data)
         // if (!new RegExp('^[a-zA-Zа-яА-Яё ]+$').test(data[0])) inds.push(0)
         for(let i in data){
             switch(i){
@@ -55,6 +62,10 @@ const Sign_on = () =>{
                 case 'surname':
                 case 'fatherName':
                     if (!new RegExp('^[a-zA-Zа-яА-Я]+$').test(data[i])) inds.push(i)
+                break
+                case 'agreement1':
+                case 'agreement2':
+                    if (!data[i]) inds.push(i)
                 break
                 default: break
             }
@@ -71,7 +82,14 @@ const Sign_on = () =>{
             </>
         )
     }
-
+    const line_check = (lable, field) =>{
+        return(
+            <>
+                <tr><td>{lable} </td><td>{input_checkbox(field)}</td></tr>
+                <tr><td></td><td>{invalids[field]&&subtext_checkbox}</td></tr>
+            </>
+        )
+    }
     return(
         <>
             {home_btn}
@@ -85,7 +103,9 @@ const Sign_on = () =>{
                     {line_field('Класс:','educationalClass', 'text')}
                     {line_field('Почта:','email', 'email')}
                     {line_field('Телефон:','phone', 'tel')}
-                    <tr><td align="center" colSpan={2}><input type='button' value='Регистрация' style={{display: 'inline-block', width:'100%'}} onClick={()=>register(values)}/></td></tr>
+                    {line_check('Согласен на рабство в татарстане:','agreement1')}
+                    {line_check('Завещаю жизнь волан-де-морту:','agreement2')}
+                    <tr><td align="center" colSpan={2}><input type='button' value='Подтверждение' style={{display: 'inline-block', width:'100%'}} onClick={()=>register(values)}/></td></tr>
                 </tbody>
             </table>
         </>
