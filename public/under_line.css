@@ -1,4 +1,9 @@
 .under_line{
-    margin-top: 100px;
+    /* margin-top: 60px; */
     background-color: bisque;
+    position: fixed;
+    vertical-align: bottom;
+
+    bottom: 0%;
+    width: 99%;
 }

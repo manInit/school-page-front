@@ -10,12 +10,12 @@ const Personal = () =>{
     return(
         <>
             <div className="head_wrap">
-            {uni_btn}
-            {home_btn}
-            <div className="head_panel">
-                {user_btn}
-                <input type='button' value='Выход'  style={{marginLeft: 'auto'}} onClick={()=>{}} />
-            </div>
+                {uni_btn}
+                {home_btn}
+                <div className="head_panel">
+                    {user_btn}
+                    <input type='button' value='Выход'  style={{marginLeft: 'auto'}} onClick={()=>{}} />
+                </div>
             </div>
             <div className="personal_trajectories">
                 {trajectories.map(elem =>(
