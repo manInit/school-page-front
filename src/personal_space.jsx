@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { base_url, home_btn, user_btn } from "./home"
+import { base_url, home_btn, under_line, uni_btn, user_btn } from "./home"
 //title="Личный кабинет"
 
 const Personal = () =>{
@@ -10,6 +10,7 @@ const Personal = () =>{
     return(
         <>
             <div className="head_wrap">
+            {uni_btn}
             {home_btn}
             <div className="head_panel">
                 {user_btn}
@@ -21,6 +22,7 @@ const Personal = () =>{
                     trajectory_div(elem)    
                 ))}
             </div>
+            {under_line}
         </>
     )
 }
