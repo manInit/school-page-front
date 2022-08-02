@@ -5,12 +5,13 @@ import uni_logo from './pics/4746124.png'
 
 export const base_url = 'http://localhost:3000'
 // export const home_btn = <input type="button" value='⌂' className='home_btn' onClick={() => {window.location.href=base_url}}/>
-export const uni_btn = <div className='uni_btn' onClick={() => {window.location.href='https://www.istu.edu'}}><img src={uni_logo} width='40' /></div>
+export const uni_btn = <div className='uni_btn' onClick={() => {window.location.href='https://www.istu.edu'}}><img src={uni_logo} width='40' alt="uni_logo"/></div>
 export const home_btn = <div value='⌂' className='home_btn' onClick={() => {window.location.href=base_url}}><span>⌂</span></div>
 export const personal_space_btn = <input type='button' value='Личный кабинет' style={{marginLeft: 'auto'}} onClick={()=>{window.location.href=base_url+'/personal'}} />
 export const user_btn = <span className="user_fi">Имя Фамилия</span>
 export const login_btn = <input type='button' value='Вход' onClick={()=>{window.location.href=base_url+'/login'}}/>
 export const register_btn = <input type='button' value='Регистрация' style={{marginLeft: 'auto'}} onClick={()=>{window.location.href=base_url+'/register'}}/>
+export const under_line = <div className="under_line"><span>чё то там будет</span></div>
 
 const Home = () =>{
     useEffect(() => {
@@ -29,6 +30,7 @@ const Home = () =>{
                     trajectory_div(elem)
                 ))}
             </div>
+            {under_line}
         </>
     )
 }
