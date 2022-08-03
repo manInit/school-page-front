@@ -7,7 +7,7 @@ export const base_url = 'http://localhost:3000'
 // export const home_btn = <input type="button" value='⌂' className='home_btn' onClick={() => {window.location.href=base_url}}/>
 export const uni_btn = <div className='uni_btn' onClick={() => {window.location.href='https://www.istu.edu'}}><img src={uni_logo} width='40' alt="uni_logo"/></div>
 export const home_btn = <div value='⌂' className='home_btn' onClick={() => {window.location.href=base_url}}><span>⌂</span></div>
-export const trajectory_btn = <input type='button' className='trajectory_btn' value='Направления' onClick={() => {window.location.href=base_url+'/trajectory'}}/>
+export const trajectory_btn = <input type='button' className='trajectory_btn' value='Направления' onClick={() => {window.location.href=base_url+'/trajectory_list'}}/>
 export const personal_space_btn = <input type='button' value='Личный кабинет' style={{marginLeft: 'auto'}} onClick={()=>{window.location.href=base_url+'/personal'}} />
 export const user_btn = <span className="user_fi">Имя Фамилия</span>
 export const login_btn = <input type='button' value='Вход' onClick={()=>{window.location.href=base_url+'/login'}}/>

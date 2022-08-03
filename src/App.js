@@ -2,7 +2,7 @@ import React from "react";
 
 import Home from "./home";
 import Personal from "./personal_space";
-import Trajectory from './trajectory'
+import TrajectoryList from './trajectory_list'
 import Sign_on from "./sign_on";
 import Sign_in from "./sign_in";
 
@@ -20,7 +20,7 @@ function App() {
           <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/personal" element={<Personal />} />
-              <Route path="/trajectory" element={<Trajectory />} />
+              <Route path="/trajectory_list" element={<TrajectoryList />} />
               <Route path="/register" element={<Sign_on />} />
               <Route path="/login" element={<Sign_in />} />
 
