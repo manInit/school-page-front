@@ -20,16 +20,16 @@
 .home_btn{
     margin-left: 5px;
     margin-right: 5px;
-    line-height: 25px;
+    /* line-height: 25px;
     text-align: center;
-    align-self: center;
+    /* align-self: center; */
     text-align: center;
-    border: 1px solid black;
-    user-select: none;
-    display: inline-block;
-    aspect-ratio: 1;
+    /* border: 1px solid black; */
+    /* user-select: none; */
+    /* display: inline-block; */
+    /* aspect-ratio: 1; */
     width: 30px;
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
 }
 
 .uni_btn{
