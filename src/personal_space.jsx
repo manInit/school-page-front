@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { base_url, home_btn, bottom_info, uni_btn, user_btn } from "./home"
+import { base_url, home_btn, bottom_info, uni_btn, user_btn, trajectory_btn } from "./home"
 
 import ActivityList from "./personal_components/activity_list";
 import PastActivityList from "./personal_components/past_activity_list";
@@ -17,7 +17,6 @@ const Personal = () =>{
         profile: Profile,//AthInfo.bind(null, {id_ath: param}),
         trajectory_point_list: TrajectoryPointList
       }[component]
-    const trajectories = [{},{},{},{},{},{},{},{}]
     return(
         <>
             <div className="head_wrap">
@@ -25,9 +24,11 @@ const Personal = () =>{
                 {home_btn}
                 <div className="head_panel">
                     {user_btn}
+                    {trajectory_btn}
                     <input type='button' value='Выход'  style={{marginLeft: 'auto'}} onClick={()=>{}} />
                 </div>
             </div>
+            <span className="title_span">Username</span>
             <div className="personal_space_title">
                 <div className="personal_space_title_btn" onClick={()=>{set_content('activity_list')}}>Мероприятия</div>
                 <div className="personal_space_title_btn" onClick={()=>{set_content('past_activity_list')}}>Достижения</div>
@@ -39,35 +40,10 @@ const Personal = () =>{
                     <Content />
                 </div>
             </div>
-            <div className="personal_trajectories" hidden>
-                {trajectories.map(elem =>(
-                    trajectory_div(elem)    
-                ))}
-            </div>
+            
             {bottom_info}
         </>
     )
 }
 
 export default Personal
-
-const trajectory_div = (elem) =>{
-    return(
-        <>
-            <div /*key={elem.id}*/ className="personal_trajectories_item" onClick={()=>window.location.href=base_url+'/trajectory'}>
-                Траектория развития
-            </div>
-            {[[]].map(elem => (
-                trajectory_activity(elem)
-            ))}
-        </>
-    )
-}
-
-const trajectory_activity = (elem) =>{
-    return(
-        <div /*key={elem.id}*/ className="personal_trajectories_activity" onClick={()=>{}}>
-            Активность
-        </div>
-    )
-}
