@@ -11,6 +11,8 @@ import {
   Route,
   Routes
   } from 'react-router-dom';
+import Trajectory from "./trajectory";
+import Activity from "./activity";
 
 function App() {
   return (
@@ -21,8 +23,10 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/personal" element={<Personal />} />
               <Route path="/trajectory_list" element={<TrajectoryList />} />
+              <Route path="/trajectory" element={<Trajectory />} />
               <Route path="/register" element={<Sign_on />} />
               <Route path="/login" element={<Sign_in />} />
+              <Route path="/activity" element={<Activity />} />
 
           </Routes>
           </>
