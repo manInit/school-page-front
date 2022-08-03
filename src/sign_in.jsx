@@ -59,18 +59,20 @@ const Sign_in = () =>{
     return(
         <>
             {home_btn}
-            <div className="content_container">
-                <table>
-                    <caption style={{backgroundColor: 'orange'}}>Вход:</caption>
-                    <tbody>
-                        <tr><td>што-то: </td><td>{input_type('text', 'email')}</td></tr>
-                        <tr><td></td><td>{invalids['email']&&subtext}</td></tr>
-                        <tr><td>Пароль: </td><td>{input_type('password', 'password')}</td></tr>
-                        <tr><td></td><td>{invalids['password']&&subtext}</td></tr>
+            <div className="content_block">
+                <div className="">
+                    <table width='100%'>
+                        <caption style={{backgroundColor: 'orange'}}>Вход:</caption>
+                        <tbody>
+                            <tr><td>што-то: </td><td>{input_type('text', 'email')}</td></tr>
+                            <tr><td></td><td>{invalids['email']&&subtext}</td></tr>
+                            <tr><td>Пароль: </td><td>{input_type('password', 'password')}</td></tr>
+                            <tr><td></td><td>{invalids['password']&&subtext}</td></tr>
 
-                        <tr><td align="center" colSpan={2}><input type='button' value='Войти' style={{display: 'inline-block', width:'100%'}} onClick={()=>register(values)}/></td></tr>
-                    </tbody>
-                </table>
+                            <tr><td align="center" colSpan={2}><input type='button' value='Войти' style={{display: 'inline-block', width:'100%'}} onClick={()=>register(values)}/></td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </>
     )
