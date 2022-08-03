@@ -34,8 +34,10 @@ const Personal = () =>{
                 <div className="personal_space_title_btn" onClick={()=>{set_content('trajectory_point_list')}}>Баллы</div>
                 <div className="personal_space_title_btn" onClick={()=>{set_content('profile')}}>Профиль</div>
             </div>
-            <div className="content_container">
-                <Content />
+            <div className="content_block">
+                <div className="content_container">
+                    <Content />
+                </div>
             </div>
             <div className="personal_trajectories" hidden>
                 {trajectories.map(elem =>(

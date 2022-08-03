@@ -33,11 +33,19 @@
     padding: 2px;
 }
 
+.content_block{
+        /* align-items: center; */
+    
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+}
+
 .content_container{
     /* align-items: center; */
-    
-    margin-top: 20px;
-    display: flex;
+    width: 50%;
+    border: 1px solid black;
+    display: inline-block;       
     justify-content: center;
     /* border: 1px solid black; */
 }
