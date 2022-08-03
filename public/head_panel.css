@@ -32,3 +32,9 @@
 .uni_btn{
     /* background-image: url('../src/pics/4746124.png'); */
 }
+
+.trajectory_btn{
+    text-align: center;
+    border: 1px solid black;
+    display: inline-block;
+}
