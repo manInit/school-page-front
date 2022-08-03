@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { home_btn, personal_space_btn, bottom_info, uni_btn, user_btn, login_btn, register_btn } from "./home"
+import { home_btn, personal_space_btn, bottom_info, uni_btn, user_btn, login_btn, register_btn, base_url } from "./home"
 import { get_req } from "./utils/requests-api"
 
 
@@ -22,7 +22,7 @@ const TrajectoryList = (id) =>{
                     {personal_space_btn}
                 </div>
             </div>
-            {/* <span style={{fontSize: '200%'}}>Направления</span> */}
+            <span className="title_span">Направления</span>
             <div className="grid_container">
                 {trajectories.map(elem => (
                     trajectory_div(elem)
@@ -37,7 +37,7 @@ export default TrajectoryList
 
 const trajectory_div = (elem) =>{
     return(
-        <div /*key={elem.id}*/ className="grid_item" onClick={()=>{}}>
+        <div /*key={elem.id}*/ className="grid_item" onClick={()=>{window.location.href=base_url+'/trajectory'}}>
             Название направлений
             Описание
             Кому пригодится
