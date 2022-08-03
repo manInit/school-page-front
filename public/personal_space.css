@@ -34,7 +34,10 @@
 }
 
 .content_container{
+    /* align-items: center; */
+    
+    margin-top: 20px;
     display: flex;
     justify-content: center;
-
+    /* border: 1px solid black; */
 }

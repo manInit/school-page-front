@@ -1,12 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { base_url, home_btn, bottom_info, uni_btn, user_btn } from "./home"
+
+import ActivityList from "./personal_components/activity_list";
+import PastActivityList from "./personal_components/past_activity_list";
 import Profile from "./personal_components/profile";
+import TrajectoryPointList from "./personal_components/trajectory_point_list";
 
 const Personal = () =>{
     useEffect(() => {
         document.title = `Личный кабинет`;
     })
-
+    const [component, set_content] = useState('trajectory_point_list')
+    const Content = {
+        activity_list: ActivityList,
+        past_activity_list: PastActivityList,
+        profile: Profile,//AthInfo.bind(null, {id_ath: param}),
+        trajectory_point_list: TrajectoryPointList
+      }[component]
     const trajectories = [{},{},{},{},{},{},{},{}]
     return(
         <>
@@ -19,13 +29,13 @@ const Personal = () =>{
                 </div>
             </div>
             <div className="personal_space_title">
-                <div className="personal_space_title_btn">Мероприятия</div>
-                <div className="personal_space_title_btn">Достижения</div>
-                <div className="personal_space_title_btn">Баллы</div>
-                <div className="personal_space_title_btn">Профиль</div>
+                <div className="personal_space_title_btn" onClick={()=>{set_content('activity_list')}}>Мероприятия</div>
+                <div className="personal_space_title_btn" onClick={()=>{set_content('past_activity_list')}}>Достижения</div>
+                <div className="personal_space_title_btn" onClick={()=>{set_content('trajectory_point_list')}}>Баллы</div>
+                <div className="personal_space_title_btn" onClick={()=>{set_content('profile')}}>Профиль</div>
             </div>
             <div className="content_container">
-                <Profile />
+                <Content />
             </div>
             <div className="personal_trajectories" hidden>
                 {trajectories.map(elem =>(
