@@ -1,30 +1,25 @@
 import { useState } from "react"
-
-
-// const values ={
-//     name: '',
-//     surname: '',
-//     fatherName: '',
-//     educationalOrganization: '',
-//     educationalClass: '',
-//     email: '',
-//     phoneNumber: ''
-// }
+import Popup_modal from "../popup/popup_modal";
 const values ={
-    name: 'Вова',
-    surname: 'Гельштейн',
-    fatherName: 'Максимович',
-    educationalOrganization: 'мяумяуСОШ',
-    educationalClass: '10В',
-    email: 'чёта',
-    phoneNumber: '+7832923'
+    name: <span>Вова</span>,
+    surname: <span>Гельштейн</span>,
+    fatherName: <span>Максимович</span>,
+    educationalOrganization: <span>мяумяуСОШ</span>,
+    educationalClass: <span>10В</span>,
+    email: <span>чёта</span>,
+    phoneNumber: <span>+7832923</span>
 }
-const falses = (()=>{
-    const a = []
-    for (let i in values)
-        a[i] = !!values[i]
-    return a
-})()
+// const values ={
+//     name: 'Вова',
+//     surname: 'Гельштейн',
+//     fatherName: 'Максимович',
+//     educationalOrganization: 'мяумяуСОШ',
+//     educationalClass: '10В',
+//     email: 'чёта',
+//     phoneNumber: '+7832923'
+// }
+
+
 
 const subtext = <span style={{color:'red', fontSize: '80%'}}>*недопустимый формат</span>
 const input_type = (type, name) =>{
@@ -33,12 +28,13 @@ const input_type = (type, name) =>{
 
 
 const Profile = () =>{
-    const [invalids, setInvalids] = useState(falses)    
-    const line_field = (lable, field, type) =>{
+    const [span_text, set_span_text] = useState()    
+    const [popup_visible, set_popup_visible] = useState(false)    
+    const [invalids, setInvalids] = useState(false)    
+    const line_field = (lable, field) =>{
         return(
             <>
-                <tr><td>{lable} </td><td><span>{values[field]}</span>{input_type(type, field)}</td><td>{edit_btn(field, '/api/athlet/name')}</td></tr>
-                <tr><td></td><td>{invalids[field]&&subtext}</td></tr>
+                <tr><td>{lable} </td><td>{values[field]}</td><td>{edit_btn(field, '/api/athlet/name')}</td></tr>
             </>
         )
     }
@@ -62,10 +58,18 @@ const Profile = () =>{
 
     }
     const edit_btn = (field, link) =>{
-        return <input type="button" value="✐" onClick={(e) => {change_value(field, e.target, link)}}></input>
+        return <input type="button" value="✐" onClick={() => {set_span_text(values[field].textContent); set_popup_visible(true)}}></input>
     }
     return(
         <>
+            <Popup_modal active={popup_visible} setActive={set_popup_visible}>
+                <input type='text' placeholder={span_text}/><br></br>
+                {subtext}
+                <br></br><br></br>
+                <div style={{display: 'flex', justifyContent: 'center'}}>
+                    <input type='button' value='изменить' onClick={()=>{set_popup_visible(false)}}/>
+                </div>
+            </Popup_modal>
             <table>
             <tbody>
                 {line_field('Имя', 'name', 'text')}
