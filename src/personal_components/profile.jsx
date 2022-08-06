@@ -67,7 +67,7 @@ const Profile = () =>{
                 {subtext}
                 <br></br><br></br>
                 <div style={{display: 'flex', justifyContent: 'center'}}>
-                    <input type='button' value='изменить' onClick={()=>{set_popup_visible(false)}}/>
+                    <input type='button' value='изменить' onClick={()=>{set_popup_visible(false); values['name'].textContent = 'sdfsdfsd'}}/>
                 </div>
             </Popup_modal>
             <table>

@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { home_btn, personal_space_btn, bottom_info, uni_btn, user_btn, login_btn, register_btn, base_url } from "./home"
 import { get_req } from "./utils/requests-api"
 
@@ -37,10 +38,12 @@ export default TrajectoryList
 
 const trajectory_div = (elem) =>{
     return(
-        <div /*key={elem.id}*/ className="grid_item" onClick={()=>{window.location.href=base_url+'/trajectory'}}>
-            Название направлений
-            Описание
-            Кому пригодится
-        </div>
+            <Link to='/trajectory'>
+                <div /*key={elem.id}*/ className="grid_item" >
+                    Название направлений
+                    Описание
+                    Кому пригодится
+                </div>
+            </Link>
     )
 }

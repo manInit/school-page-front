@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { home_btn, personal_space_btn, bottom_info, uni_btn, user_btn, login_btn, register_btn, base_url, trajectory_btn } from "./home"
 
 
@@ -39,9 +40,11 @@ export default Trajectory
 const trajectory_div = (elem) =>{
     return(
         <>
-            <div /*key={elem.id}*/ className="trajectory_activity" onClick={()=>{window.location.href=base_url+'/activity'}}>
-                Активность
-            </div>
+            <Link to='/activity'>
+                <div /*key={elem.id}*/ className="trajectory_activity" >
+                    Активность
+                </div>
+            </Link>
         </>
     )
 }
