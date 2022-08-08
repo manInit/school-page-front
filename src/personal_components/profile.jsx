@@ -15,6 +15,7 @@ const subtext = <span style={{color:'red', fontSize: '80%'}}>*недопусти
 
 const Profile = () =>{
     const [chosen_span, set_chosen_span] = useState()
+    const [edit_data_type, set_edit_data_type] = useState()
     
     let new_value
     let put_link
@@ -22,7 +23,7 @@ const Profile = () =>{
     console.log(data)
     const [popup_visible, set_popup_visible] = useState(false)    
     const [invalid, setInvalid] = useState(false)
-    const edit_data = <input type='text' defaultValue = {values[chosen_span]} onChange={(e)=>{if(e.target.value!==undefined) new_value = e.target.value}} />
+    const edit_data = <input type={edit_data_type} defaultValue = {values[chosen_span]} onChange={(e)=>{if(e.target.value!==undefined) new_value = e.target.value}} />
     const view_data = (lable, field, type, link) =>{
         return(
             <>
@@ -57,7 +58,7 @@ const Profile = () =>{
 
     }
     const edit_btn = (field, type, link) =>{
-        return <input type="button" value="✐" onClick={() => { set_popup_visible(true); set_chosen_span(field); put_link=link}}></input>
+        return <input type="button" value="✐" onClick={() => { set_popup_visible(true); set_chosen_span(field); set_edit_data_type(type); put_link=link}}></input>
     }
     return(
         <>
