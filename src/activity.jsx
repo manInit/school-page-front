@@ -15,7 +15,6 @@ const Activity = () =>{
                 <div style={{textAlign: 'center'}}>
                     ну, чё, Уверен?<br></br>
                     <input type='button' value='Да' onClick={()=>{set_visible_confirm(false)}}/>
-                    <input type='button' value='Нет' style={{marginLeft: '20px'}} onClick={()=>{set_visible_confirm(false)}}/>
                 </div>
 
             </Popup_modal>
