@@ -1,13 +1,13 @@
 import { useState } from "react"
 import Popup_modal from "../popup/popup_modal";
 const values ={
-    name: <span>Вова</span>,
-    surname: <span>Гельштейн</span>,
-    fatherName: <span>Максимович</span>,
-    educationalOrganization: <span>мяумяуСОШ</span>,
-    educationalClass: <span>10В</span>,
-    email: <span>чёта</span>,
-    phoneNumber: <span>+7832923</span>
+    name: 'Вова',
+    surname: 'Гельштейн',
+    fatherName: 'Максимович',
+    educationalOrganization: 'мяумяуСОШ',
+    educationalClass: '10В',
+    email: 'чёта',
+    phoneNumber: '+7832923'
 }
 // const values ={
 //     name: 'Вова',
@@ -28,46 +28,59 @@ const input_type = (type, name) =>{
 
 
 const Profile = () =>{
-    const [span_text, set_span_text] = useState()    
+    const [active_span, set_active_span] = useState()    
+    let new_value
+    const [span_text, set_span_text] = useState(values)    
+    console.log(span_text)
     const [popup_visible, set_popup_visible] = useState(false)    
-    const [invalids, setInvalids] = useState(false)    
+    const [invalids, setInvalids] = useState(false)
+    const input_new_value = <input type='text' defaultValue = {values[active_span]} onChange={(e)=>{if(e.target.value!==undefined) new_value = e.target.value}} />
     const line_field = (lable, field) =>{
         return(
             <>
-                <tr><td>{lable} </td><td>{values[field]}</td><td>{edit_btn(field, '/api/athlet/name')}</td></tr>
+                <tr><td>{lable} </td><td>{span_text[field]}</td><td>{edit_btn(field, '/api/athlet/name')}</td></tr>
             </>
         )
     }
-    const change_value = (field, target, link) =>{
-        console.log(`${field} `)
+    const change_value = (target, link) =>{
+
+        
+
+        console.log(`${active_span} `)
         console.log(values)
-        switch(field){
+        switch(active_span){
             case 'name':
             case 'surname':
             case 'fatherName':
-                show_invalid(new RegExp('^[a-zA-Zа-яА-Я]+$').test(values[field]), field)
+                show_invalid(new RegExp('^[a-zA-Zа-яА-Я]+$').test(new_value) && new_value!==undefined)
             break
             default: break
         }
     }
-    const show_invalid = (cond, field) =>{
-        if(cond === invalids[field]){
-            invalids[field] = !cond
-            setInvalids(arr => ({...arr}))
+    const show_invalid = (cond) =>{
+        console.log(cond, invalids, new_value)
+        if(cond === invalids){
+            setInvalids(!cond)
+        }
+        if (cond){
+            set_popup_visible(false)
+            span_text[active_span] = new_value
+            set_span_text(arr => ({...arr}))
         }
 
     }
     const edit_btn = (field, link) =>{
-        return <input type="button" value="✐" onClick={() => {set_span_text(values[field].textContent); set_popup_visible(true)}}></input>
+        return <input type="button" value="✐" onClick={() => { set_popup_visible(true); set_active_span(field)}}></input>
     }
     return(
         <>
             <Popup_modal active={popup_visible} setActive={set_popup_visible}>
-                <input type='text' placeholder={span_text}/><br></br>
-                {subtext}
+                {popup_visible&&input_new_value}
+                <br></br>
+                {invalids&&subtext}
                 <br></br><br></br>
                 <div style={{display: 'flex', justifyContent: 'center'}}>
-                    <input type='button' value='изменить' onClick={()=>{set_popup_visible(false); values['name'].textContent = 'sdfsdfsd'}}/>
+                    <input type='button' value='изменить' onClick={()=>change_value()}/>
                 </div>
             </Popup_modal>
             <table>
