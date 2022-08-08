@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { base_url, home_btn, bottom_info, uni_btn, user_btn, trajectory_btn } from "./home"
+import { base_url, home_btn, bottom_info, uni_btn, user_fi, trajectory_btn } from "./home"
 
 import ActivityList from "./personal_components/activity_list";
 import PastActivityList from "./personal_components/past_activity_list";
@@ -23,7 +23,7 @@ const Personal = () =>{
                 {uni_btn}
                 {home_btn}
                 <div className="head_panel">
-                    {user_btn}
+                    {user_fi}
                     {trajectory_btn}
                     <input type='button' value='Выход'  style={{marginLeft: 'auto'}} onClick={()=>{}} />
                 </div>

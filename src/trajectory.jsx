@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { home_btn, personal_space_btn, bottom_info, uni_btn, user_btn, login_btn, register_btn, base_url, trajectory_btn } from "./home"
+import { Link, useNavigate } from "react-router-dom";
+import { home_btn, personal_space_btn, bottom_info, uni_btn, user_fi, login_btn, register_btn, trajectory_btn } from "./home"
 
 
 const Trajectory = () =>{
@@ -17,7 +17,6 @@ const Trajectory = () =>{
                     {trajectory_btn}
                     {login_btn}
                     {register_btn}
-                    {/* {user_btn} */}
                     {personal_space_btn}
                 </div>
             </div>
@@ -27,7 +26,7 @@ const Trajectory = () =>{
                     Траектория развития
                 </div>
                 {trajectories.map(elem =>(
-                    trajectory_div(elem)    
+                    Trajectory_div(elem)    
                 ))}
             </div>
             {bottom_info}
@@ -37,14 +36,14 @@ const Trajectory = () =>{
 
 export default Trajectory
 
-const trajectory_div = (elem) =>{
+const Trajectory_div = (elem) =>{
+    const navigator = useNavigate()
+
     return(
         <>
-            <Link to='/activity'>
-                <div /*key={elem.id}*/ className="trajectory_activity" >
-                    Активность
-                </div>
-            </Link>
+            <div /*key={elem.id}*/ className="trajectory_activity" onClick={()=>navigator('/activity')}>
+                Активность
+            </div>
         </>
     )
 }
