@@ -1,11 +1,17 @@
 # school-page-front
 
-preparing:
+## Установка 
+Пропишите в корне проекта 
+```bash
+npm i  
+```
 
-  npm install
+## Запуска для разработки
+```bash
+npm start
+```
 
-  npm install react-router-dom
-
-start:
-
-  npm start
+## Получить prod сборку
+```bash
+npm run build
+```

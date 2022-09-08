@@ -1,13 +1,19 @@
-import './popup_modal.css'
+import { React } from 'react';
 
-const Popup_modal = ({active, setActive, children}) =>{
-    return(
-        <div className={active ? "popup_block active" : "popup_block"} onClick={() => setActive(false)}>
-            <div className="popup_content" onClick={e => e.stopPropagation()}>
-                {children}
-            </div>
-        </div>
-    )
-}
+import './popup_modal.scss';
 
-export default Popup_modal
+// eslint-disable-next-line react/prop-types
+const Popup_modal = ({ active, setActive, children }) => {
+  return (
+    <div
+      className={active ? 'popup_block active' : 'popup_block'}
+      onClick={() => setActive(false)}
+    >
+      <div className='popup_content' onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
+    </div>
+  );
+};
+
+export default Popup_modal;
