@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { home_btn, personal_space_btn, bottom_info, uni_btn, user_fi, login_btn, register_btn, trajectory_btn } from "./home"
+import { useNavigate } from "react-router-dom";
+import { home_btn, personal_space_btn, bottom_info, uni_btn, login_btn, register_btn, trajectory_btn } from "./home"
 
 
 const Trajectory = () =>{
