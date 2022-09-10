@@ -15,6 +15,6 @@ jobs:
         port: 22
         script: |
           cd /var/www/school-page-front
-          git pull origin master
+          git pull origin main
           npm i
           npm run build
