@@ -15,3 +15,4 @@ npm start
 ```bash
 npm run build
 ```
+## [Деплой](https://92.63.101.204)
