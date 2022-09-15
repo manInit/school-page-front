@@ -6,6 +6,7 @@
     "node": true
   },
   "rules": {
+    "react/prop-types": 0,
     "semi": ["warn", "always"],
     "indent": ["error", 2],
     "quotes": ["error", "single"],
