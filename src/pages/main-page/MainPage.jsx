@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../../components/header/Header';
 
 import './index.scss';
@@ -22,7 +23,7 @@ function MainPage() {
         </div>
         <div className="main-page__registration">
           <button>
-            Регистрация
+            <Link to='/register'>Регистрация</Link>
           </button>
         </div>
       </div>
