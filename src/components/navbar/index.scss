@@ -1,9 +1,14 @@
 .navbar {
-  font-family: 'Poximanova';
-  font-size: 24px;
-  font-weight: 200;
   &__link {
     color: var(--link-color);
+    font-family: 'Proximanova';
+    font-size: 22px;
+    font-weight: 200;
+    letter-spacing: 1.2px;
+
+    &:hover {
+      text-decoration: underline;
+    }
 
     & + & {
       margin-left: 60px;

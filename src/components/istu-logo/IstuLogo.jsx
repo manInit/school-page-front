@@ -10,7 +10,7 @@ function IstuLogo({ className }) {
       <img className='istu-logo__image' src={logo} alt="istu logo" />
       <div className='istu-logo__titles'>
         <h3 className='istu-logo__title'>Иркутский политех</h3>
-        <span className='istu-logo__full-name'>Кошмар ты вот все. мне стыдно это показывать будет даже дизайнеру</span>
+        <span className='istu-logo__full-name'>Иркутский национальный исследоватльский технический университет</span>
       </div>
     </div>
   );  

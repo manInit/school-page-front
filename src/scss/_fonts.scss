@@ -1,25 +1,15 @@
 @font-face {
   font-family: 'Garamond';
-  src: url('../assets/fonts/EBGaramondSC08-Regular.otf') format('otf');
-}
-
-@font-face {
-  font-family: 'Poximanova';
-  src: url('../assets/fonts/proximanova_regular.ttf') format('ttf');
+  src: url('../assets/fonts/Garamond-Regular.ttf') format('ttf');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Poximanova';
-  src: url('../assets/fonts/proximanova_light.otf') format('otf');
-  font-weight: 200;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Poximanova';
-  src: url('../assets/fonts/proximanova_bold.otf') format('otf');
-  font-weight: 600;
+  font-family: 'Proximanova';
+  src: url('../assets/fonts/ProximaNova-Regular.ttf') format('ttf'),
+    url('../assets/fonts/ProximaNova-Regular.woff') format('woff'),
+    url('../assets/fonts/ProximaNova-Regular.eot') format('eot');
+  font-weight: 400;
   font-style: normal;
 }
