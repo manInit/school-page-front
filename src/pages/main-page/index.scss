@@ -58,4 +58,53 @@
       }
     }
   }
+
 }
+
+.registration-block{
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 864px;
+  height: 549px;
+  left: 450px;
+  top: 157px;
+
+  background: #FFFFFF;
+  border-radius: 40px;
+}
+
+.registration-block-shadow{
+  position: absolute;
+  width: 864px;
+  height: 549px;
+  left: 473px;
+  top: 181px;
+
+  background: linear-gradient(292.37deg, rgba(234, 173, 255, 0.24) 2.03%, rgba(34, 72, 153, 0.1) 100.85%);
+  border-radius: 40px;
+  z-index: -1;
+}
+
+.registration-input-form{
+  display: flex;
+  margin: auto;
+  width: 100%;
+  height: 46px;
+  margin-bottom: 6px;
+  left: 515px;
+  top: 186px;
+  border-radius: 20px;
+}
+
+.registration-input-form-border-wrap{
+  padding: 1rem;
+  position: relative;
+  border: linear-gradient(rgba(169, 82, 255, 0.47), rgba(39, 75, 155, 0.65));
+}
+
+.registration-block__content{
+  margin: auto;
+  width: 84%;
+}
+
