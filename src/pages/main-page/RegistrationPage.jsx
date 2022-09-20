@@ -19,8 +19,13 @@ function RegistrationPage() {
             <input className="registration-input-form" placeholder="Номер телефона" />
             <input className="registration-input-form" placeholder="E-mail" />
             <p>
-              <input type={'checkbox'} style={{}}/>
-              <span style={{fontSize: '12px', alignItems: 'center', color: 'rgba(158, 86, 250, 0.75)'}}>Согласие на обработку персональных данных</span>
+              <div className="container">
+                <div className="round" style={{}}>
+                  <input type="checkbox" id="checkbox" />
+                  <label htmlFor="checkbox"></label>
+                  <span style={{marginLeft: '14px', fontSize: '12px', alignItems: 'center', color: 'rgba(158, 86, 250, 0.75)'}}>Согласие на обработку персональных данных</span>
+                </div>
+              </div>
             </p>
             <div style={{textAlign: 'center'}}>
               <input type={'button'} value='Регистрация' style={{width: '422px', height: '45px', background: '#3155A3', borderRadius: '15px', color: 'white', fontFamily: 'Proxima Nova', fontSize: '20px'}}/>
