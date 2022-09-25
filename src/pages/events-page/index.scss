@@ -1,0 +1,25 @@
+.event-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Proximanova';
+  &__content {
+    padding: 0 150px;
+    align-items: center;
+    background: url('../../assets/images/wave-bottom-1.png'),
+    url('../../assets/images/wave-bottom-2.png');
+    background-position: 0 -200px, 0 -210px;
+    background-size: cover, cover;
+    flex-grow: 1;
+  }
+  &__title {
+    margin-top: 50px;
+    font-size: 40px;
+    color: var(--title-color);
+  }
+  &__paths {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 70px;
+  }
+}
