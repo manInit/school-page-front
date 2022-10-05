@@ -1,1 +1,9 @@
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
+
+
+.school-input {
+  background-color: var(--input-bg);
+  font-size: 1.2rem;
+  border-radius: 25px;
+  padding: 0.25rem 1.25rem;
+}
