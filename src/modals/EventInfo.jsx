@@ -1,7 +1,7 @@
 import React from 'react';
 import './EventInfo.css';
 
-const EventInfoRegistered = ({}) => {
+const EventInfo = ({}) => {
   // const acc_data = get_req(`/api/account/id/${id}`)
   const eventData = { 
     name: 'Межпредметная олимпиада школьников «Политехник»', 
@@ -47,4 +47,4 @@ const EventInfoRegistered = ({}) => {
   );
 };
 
-export default EventInfoRegistered;
+export default EventInfo;
