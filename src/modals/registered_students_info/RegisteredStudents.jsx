@@ -1,12 +1,13 @@
 import React from 'react';
 import './RegisteredStudents.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button, Card, Table } from 'react-bootstrap';
 
-const EventInfoRegistered = ({setActive}) => {
+const EventInfoRegistered = ({}) => {
   // const acc_data = get_req(`/api/account/id/${id}`)
-  const eventData = { 
-    name: 'Межпредметная олимпиада школьников «Политехник»', 
-    description: 
-    `Олимпиада проводится для учащихся 8-11 классов и студентов СПО по предметам:
+  const eventData = {
+    name: 'Межпредметная олимпиада школьников «Политехник»',
+    description: `Олимпиада проводится для учащихся 8-11 классов и студентов СПО по предметам:
 
     Физика
     Химия
@@ -18,50 +19,60 @@ const EventInfoRegistered = ({setActive}) => {
     Современное самолетостроение (запуск в 2022/2023 уч.г.)`,
     date: '24.10',
     from_ball: 6,
-    to_ball: 8,
+    to_ball: 8
   };
 
   const accounts_data = [
     {
       name: 'Имя',
       surname: 'Фамилия',
-      patronym: 'Отчество',
+      patronym: 'Отчество'
     },
     {
       name: 'Имя2',
       surname: 'Фамилия',
-      patronym: 'Отчество',
+      patronym: 'Отчество'
+    },
+    {
+      name: 'Имя2',
+      surname: 'Фамилия',
+      patronym: 'Отчество'
     }
   ];
-  const viewInfoBtn = <button>👁</button>;
+  const viewInfoBtn = (
+    <Button variant='secondary'>
+      <FontAwesomeIcon icon='fa-solid fa-eye' />
+    </Button>
+  );
   // console.log(acc_json.get_info+acc_json.id)
-  return(
+  return (
     <>
-      <div style={{width: '80%', marginLeft: '10%'}}>
-        <div style={{display: 'grid', gridTemplateColumns: '85% 5% 10%'}}>
-          <span className='brick'>
-            {eventData.name}
-          </span>
-          <span/>
-          <span className='brick' style={{textAlign: 'center'}} onClick={()=>{setActive(false);}}>&#x2715;</span>
+      <div style={{ width: '80%', marginLeft: '10%' }}>
+        <div>
+          <Card className='brick' style={{fontSize: '1.8em'}}>{eventData.name}</Card>
         </div>
-        <div className='brick' style={{whiteSpace: 'pre-line'}} >
+        <Card className='brick' style={{marginBottom: '1em', whiteSpace: 'pre-line' }}>
           {eventData.description}
-        </div>
-        <table className='registered-student' style={{width: '100%'}}>
+        </Card>
+        <Table striped bordered hover>
           <thead>
-            <tr style={{borderBottom: 'solid 2px'}}>
+            <tr>
               <td>Фамилия</td>
               <td>Имя</td>
               <td>Отчество</td>
             </tr>
           </thead>
           <tbody>
-            {accounts_data.map((elem, i)=>(
-              <tr key={i}><td>{elem.surname}</td><td>{elem.name}</td><td>{elem.patronym}</td><td>{viewInfoBtn}</td></tr>
+            {accounts_data.map((elem, i) => (
+              <tr key={i}>
+                <td>{elem.surname}</td>
+                <td>{elem.name}</td>
+                <td>{elem.patronym}</td>
+                <td>{viewInfoBtn}</td>
+              </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
       </div>
     </>
   );
