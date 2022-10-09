@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card } from 'react-bootstrap';
 import './EventInfo.css';
 
 const EventInfo = ({}) => {
@@ -25,22 +26,22 @@ const EventInfo = ({}) => {
   return(
     <>
       <div style={{width: '80%', marginLeft: '10%'}}>
-        <div className='brick' style={{fontSize: 'x-large'}}>
+        <Card className='brick' style={{fontSize: 'x-large'}}>
           {eventData.name}
-        </div>
-        <div className='brick' style={{whiteSpace: 'pre-line'}}>
+        </Card>
+        <Card className='brick' style={{whiteSpace: 'pre-line'}}>
           {eventData.description}
-        </div>
+        </Card>
         <div style={{textAlign: 'center', display: 'grid', gridTemplateColumns: '30% 40% 30%'}}>
-          <span className='brick'>
+          <Card className='brick'>
             {eventData.date}
-          </span>
-          <span className='brick' style={{margin: '1em 1em 0em 1em'}}>
+          </Card>
+          <Card className='brick' style={{margin: '1em 1em 0em 1em'}}>
             {eventData.from_ball}-{eventData.to_ball} баллов
-          </span>
-          <span className='brick' onClick={()=>{}}>
+          </Card>
+          <Card className='brick' style={{cursor: 'pointer'}} onClick={()=>{}}>
             Подать заявку 
-          </span>
+          </Card>
         </div>
       </div>
     </>
