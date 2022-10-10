@@ -2,10 +2,10 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import './EventInfo.css';
 
-const EventInfo = ({}) => {
+const EventInfo = ({event}) => {
   // const acc_data = get_req(`/api/account/id/${id}`)
   const eventData = { 
-    name: 'Межпредметная олимпиада школьников «Политехник»', 
+    name: event.name, 
     description: 
     `Олимпиада проводится для учащихся 8-11 классов и студентов СПО по предметам:
 
@@ -17,7 +17,7 @@ const EventInfo = ({}) => {
     3D моделирование инженерных объектов
     Современная энергетика
     Современное самолетостроение (запуск в 2022/2023 уч.г.)`,
-    date: '24.10',
+    date: event.date,
     from_ball: 6,
     to_ball: 8,
   };

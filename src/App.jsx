@@ -14,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<AuthPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/events" element={<EventPage />} />
         </Routes>
       </BrowserRouter>
     </div>
