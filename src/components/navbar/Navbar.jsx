@@ -19,7 +19,7 @@ function NavbarLink({ className }) {
         <Nav className='ms-auto'>
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
             <li className='nav-item'>
-              <Link className='navbar__link' to='/'>
+              <Link className='navbar__link' to='/events'>
                 Мероприятия
               </Link>
             </li>
