@@ -4,6 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { emailRegExp } from '../../utils';
 import InputMask from 'react-input-mask';
 import './index.scss';
+import { registerRequest } from '../../services/auth';
 
 function RegisterPage() {
   const {
@@ -12,7 +13,10 @@ function RegisterPage() {
     control,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  const onSubmit = (data) => {
+    registerRequest(data);
+  };
 
   return (
     <div className='main-page mx-auto'>
@@ -40,7 +44,7 @@ function RegisterPage() {
               </div>
               <div className='mt-3'>
                 <input
-                  {...register('firstName', {
+                  {...register('name', {
                     required: true,
                     pattern: /^[А-Яа-я]+$/i,
                   })}
@@ -49,7 +53,7 @@ function RegisterPage() {
                   className='school-input form-control'
                   placeholder='Имя...'
                 />
-                {errors.firstName && (
+                {errors.name && (
                   <div className='ms-2 invalid-feedback d-block'>
                     Введите имя
                   </div>
@@ -57,7 +61,7 @@ function RegisterPage() {
               </div>
               <div className='mt-3'>
                 <input
-                  {...register('middleName', {
+                  {...register('lastName', {
                     required: true,
                     pattern: /^[А-Яа-я]+$/i,
                   })}
@@ -66,7 +70,7 @@ function RegisterPage() {
                   className='school-input form-control'
                   placeholder='Отчество...'
                 />
-                {errors.middleName && (
+                {errors.lastName && (
                   <div className='ms-2 invalid-feedback d-block'>
                     Введите отчество
                   </div>
@@ -106,7 +110,7 @@ function RegisterPage() {
               </div>
               <div className='mt-3'>
                 <input
-                  {...register('class', {
+                  {...register('schoolClass', {
                     required: true,
                   })}
                   id='reg-class'
@@ -114,7 +118,7 @@ function RegisterPage() {
                   className='school-input form-control'
                   placeholder='Класс...'
                 />
-                {errors.class && (
+                {errors.schoolClass && (
                   <div className='ms-2 invalid-feedback d-block'>
                     Введите класс
                   </div>
@@ -122,18 +126,18 @@ function RegisterPage() {
               </div>
               <div className='mt-3'>
                 <Controller
-                  name='telephone'
+                  name='phoneNumber'
                   control={control}
-                  render={({field: { onChange }}) => (
+                  render={({ field: { onChange } }) => (
                     <InputMask
                       onChange={onChange}
-                      alwaysShowMask 
+                      alwaysShowMask
                       className='school-input form-control'
                       mask='+7 (999) 999-99-99'
                     />
                   )}
                 />
-                {errors.telephone && (
+                {errors.phoneNumber && (
                   <div className='ms-2 invalid-feedback d-block'>
                     Введите телефон
                   </div>

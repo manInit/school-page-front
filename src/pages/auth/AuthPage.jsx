@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { emailRegExp } from '../../utils';
-
+import { loginRequest } from '../../services/auth';
 import './index.scss';
 
 function AuthPage() {
@@ -11,8 +11,9 @@ function AuthPage() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  
   const onSubmit = (data) => {
-    console.log(data);
+    loginRequest(data);
   };
 
   return (
@@ -24,7 +25,7 @@ function AuthPage() {
             <form onSubmit={handleSubmit(onSubmit)} className='mt-4'>
               <div>
                 <input
-                  {...register('login', {
+                  {...register('username', {
                     required: true,
                     pattern: emailRegExp,
                   })}
@@ -33,7 +34,7 @@ function AuthPage() {
                   className='school-input form-control'
                   placeholder='E-mail...'
                 />
-                {errors.login && (
+                {errors.username && (
                   <div className='ms-2 invalid-feedback d-block'>
                     Введите корректную почту
                   </div>
