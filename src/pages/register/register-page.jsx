@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { emailRegExp } from '../../utils';
 import InputMask from 'react-input-mask';
 import './index.scss';
-import { registerRequest } from '../../services/auth';
+import authStore from '../../store/auth';
 
 const RegisterPage = () => {
   const {
@@ -14,8 +14,9 @@ const RegisterPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    registerRequest(data);
+  const onSubmit = async (data) => {
+    await authStore.register(data);
+    navigate('/');
   };
 
   return (
