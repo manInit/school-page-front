@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import IstuLogo from '../istu-logo/IstuLogo';
+import IstuLogo from '../istu-logo/istu-logo';
 
 import './index.scss';
 
-function NavbarLink({ className }) {
+const NavbarLink = ({ className }) => {
   return (
     <Navbar expand='lg' className={'w-100 d-flex ' + className}>
       <Navbar.Brand href='/'>
@@ -19,23 +19,18 @@ function NavbarLink({ className }) {
         <Nav className='ms-auto'>
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
             <li className='nav-item'>
-              <Link className='navbar__link' to='/events'>
+              <Link className='navbar__link' to='/'>
                 Мероприятия
               </Link>
             </li>
             <li className='nav-item mx-lg-4'>
-              <Link className='navbar__link' to='/'>
-                Карта
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link className='navbar__link' to='/'>
+              <Link className='navbar__link' to='/my'>
                 Личный кабинет
               </Link>
             </li>
-            <li className='nav-item mx-lg-4'>
-              <Link className='navbar__link' to='/'>
-                Вход
+            <li className='nav-item'>
+              <Link className='navbar__link' to='/login'>
+                Вход/Регистрация
               </Link>
             </li>
           </ul>
@@ -43,6 +38,6 @@ function NavbarLink({ className }) {
       </Navbar.Collapse>
     </Navbar>
   );
-}
+};
 
 export default NavbarLink;

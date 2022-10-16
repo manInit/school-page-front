@@ -1,19 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { emailRegExp } from '../../utils';
-import { loginRequest } from '../../services/auth';
+import authStore from '../../store/auth';
+
 import './index.scss';
 
-function AuthPage() {
+const AuthPage = () => {
+  let navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  
-  const onSubmit = (data) => {
-    loginRequest(data);
+
+  const onSubmit = async (data) => {
+    await authStore.login(data);
+    navigate('/');
   };
 
   return (
@@ -68,6 +71,6 @@ function AuthPage() {
       </div>
     </div>
   );
-}
+};
 
 export default AuthPage;

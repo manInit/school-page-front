@@ -6,7 +6,7 @@ import InputMask from 'react-input-mask';
 import './index.scss';
 import { registerRequest } from '../../services/auth';
 
-function RegisterPage() {
+const RegisterPage = () => {
   const {
     register,
     handleSubmit,
@@ -183,13 +183,13 @@ function RegisterPage() {
               </div>
             </form>
             <p className='text-center mt-3'>
-              Уже есть аккаунт? <Link to='/'>Войти</Link>
+              Уже есть аккаунт? <Link to='/login'>Войти</Link>
             </p>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default RegisterPage;

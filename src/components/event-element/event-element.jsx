@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.scss';
-export default function EventElement({ event, isAdmin, showModalFunction}) {
+
+const EventElement = ({ event, isAdmin, showModalFunction}) => {
   const actionDescription = isAdmin ? 'Подробнее' : 'Подать заявку';
   return (
     <div className='event-element mb-4 row'>
@@ -13,5 +14,6 @@ export default function EventElement({ event, isAdmin, showModalFunction}) {
       <div className='event-action col btn btn-light' onClick={()=>showModalFunction(event)}>{actionDescription}</div>
     </div>
   );
-}
+};
 
+export default EventElement;

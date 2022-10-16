@@ -85,8 +85,8 @@ module.exports = {
     },
     proxy: [
       {
-        context: ['/login', '/registration'],
-        target: 'http://92.63.101.204:8080',
+        context: () => true,
+        '/': 'http://92.63.101.204:8080',
       }
     ],
     historyApiFallback: true,

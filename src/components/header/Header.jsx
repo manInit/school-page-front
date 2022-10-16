@@ -1,14 +1,14 @@
 import React from 'react';
-import Navbar from '../navbar/Navbar';
+import Navbar from '../navbar/navbar';
 
 import './index.scss';
 
-function Header() {
+const Header = () => {
   return (
     <header className='header d-flex align-items-center'>
       <Navbar className='header__navbar' />
     </header>
   );
-}
+};
 
 export default Header;

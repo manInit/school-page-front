@@ -1,20 +1,11 @@
-export async function post(url, data) {
-  const { payloadData } = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
-  return await payloadData.json();
-}
+import axios from 'axios';
 
 export async function loginRequest(data) {
-  const response = await post('http://92.63.101.204:8080/login', data);
+  const response = await axios.post('/login', data);
   return response;
 }
 
 export async function registerRequest(data) {
-  const response = await post('http://92.63.101.204:8080/registration', data);
+  const response = await axios.post('/registration', data);
   return response;
 }
