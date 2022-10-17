@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { loginRequest, registerRequest } from '../services/auth';
+import { registerRequest } from '../services/auth';
 
 class AuthStore {
   isAuth = false;
