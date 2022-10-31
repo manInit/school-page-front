@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { registerRequest } from '../services/auth';
+import { registerRequest, loginRequest } from '../services/auth';
 
 class AuthStore {
   isAuth = false;
@@ -10,21 +10,22 @@ class AuthStore {
     makeAutoObservable(this);
   }
 
-  async login({ username, password }) {
-    console.log(username, password);
-    this.isAuth = true;
-    return;
+  logout() {
+    this.isAdmin = false;
+    this.token = '';
+    this.isAuth = false;
+  }
 
-    // try {
-    //   const loginData = await loginRequest({ username, password });
-    //   this.isAuth = true;
-    //   this.token = loginData.token;
-    // } catch (e) {
-    //   console.log('login error');
-    //   this.isAuth = false;
-    //   this.token = '';
-    // }
-    // return this.token;
+  async login({ username, password }) {
+    const loginData = await loginRequest({ username, password });
+    if (!loginData.token) {
+      // TODO: handle wrong auth
+      // throw Error('invalid login');
+    }
+    this.isAuth = true;
+    this.token = loginData.token;
+
+    return this.token;
   }
 
   async register({
@@ -37,25 +38,20 @@ class AuthStore {
     phoneNumber,
     email,
   }) {
-    try {
-      const registerData = registerRequest({
-        password,
-        name,
-        secondName,
-        lastName,
-        city,
-        schoolClass,
-        phoneNumber,
-        email,
-      });
-      this.isAuth = true;
-      this.token = registerData.token;
-    } catch (e) {
-      console.log('login error');
-      this.isAuth = false;
-      this.token = '';
+    const registerData = await registerRequest({
+      password,
+      name,
+      secondName,
+      lastName,
+      city,
+      schoolClass,
+      phoneNumber,
+      email,
+    });
+    this.isAuth = true;
+    if (!registerData.token) {
+      // TODO: token or auth??
     }
-
     return this.token;
   }
 }
