@@ -16,5 +16,3 @@ jobs:
         script: |
           cd /var/www/school-page-front
           git pull origin main
-          npm i
-          npm run build
