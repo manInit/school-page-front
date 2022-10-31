@@ -29,7 +29,7 @@ const EventInfo = ({ event }) => {
         >
           <Card className='brick'>{eventData.date}</Card>
           <Card className='brick' style={{ margin: '1em 1em 0em 1em' }}>
-            {eventData.from_ball}-{eventData.to_ball} баллов
+            {eventData.from_ball} баллов
           </Card>
           <Card
             className='brick'
