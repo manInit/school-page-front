@@ -2,9 +2,10 @@ import { React, useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-bootstrap/Modal';
 import EventElement from '../../components/event-element/event-element';
-import EventInfoRegistered from '../../modals/registered_students_info/RegisteredStudents';
-import EventInfo from '../../modals/event_info/EventInfo';
+import EventInfoRegistered from '../../modals/registered-students-info/registered-students';
+import EventInfo from '../../modals/event-info/event-info';
 import eventStore from '../../store/events';
+import authStore from '../../store/auth';
 import { observer } from 'mobx-react-lite';
 
 import './index.scss';
@@ -12,7 +13,7 @@ import './index.scss';
 const EventPage = observer(() => {
   const [isModalActive, setModalActive] = useState(false);
   const [modalContent, setModalContent] = useState(null);
-  const isAdmin = true;
+  const isAdmin = authStore.isAdmin;
   const showEventCreationModal = () => {
     setModalContent(<div>Тут Создаем мероприятие</div>);
     setModalActive(true);

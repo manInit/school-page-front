@@ -1,13 +1,16 @@
 import React from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { emailRegExp } from '../../utils';
+import { emailRegExp } from '../../utils/reg-exp';
+import Toast from 'react-bootstrap/Toast';
 import authStore from '../../store/auth';
 
 import './index.scss';
 
 const AuthPage = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const [showToast, setShowToast] = useState(false);
   const {
     register,
     handleSubmit,
@@ -15,7 +18,12 @@ const AuthPage = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    await authStore.login(data);
+    try {
+      await authStore.login(data);
+    } catch (e) {
+      setShowToast(true);
+      return;
+    }
     navigate('/');
   };
 
@@ -69,6 +77,15 @@ const AuthPage = () => {
           </div>
         </div>
       </div>
+      <Toast
+        className='mx-auto fixed-center bg-danger text-white text-center'
+        onClose={() => setShowToast(false)}
+        show={showToast}
+        delay={3000}
+        autohide
+      >
+        <Toast.Body>Неверный логин или пароль</Toast.Body>
+      </Toast>
     </div>
   );
 };

@@ -1,19 +1,17 @@
-.brick{
-    background-color: gainsboro;
-    margin: 1em 0em 0em 0em;
-    padding: 0.5em;
+.brick {
+  background-color: gainsboro;
+  margin: 1em 0em 0em 0em;
+  padding: 0.5em;
 }
 
-
-
-.registered-student{
+.registered-student {
   margin-top: 1em;
   border: 2px solid;
   border-color: cadetblue;
   background-color: gainsboro;
   border-collapse: collapse;
   td {
-    border: 2px solid black; 
+    border: 2px solid black;
   }
   tr:first-child td {
     border-top: 0;

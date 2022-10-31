@@ -1,12 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import IstuLogo from '../istu-logo/istu-logo';
+import authStore from '../../store/auth';
 
 import './index.scss';
 
 const NavbarLink = ({ className }) => {
+  const navigate = useNavigate();
+  const isAuth = authStore.isAuth;
+
   return (
     <Navbar expand='lg' className={'w-100 d-flex ' + className}>
       <Navbar.Brand href='/'>
@@ -29,9 +33,22 @@ const NavbarLink = ({ className }) => {
               </Link>
             </li>
             <li className='nav-item'>
-              <Link className='navbar__link' to='/login'>
-                Вход/Регистрация
-              </Link>
+              {!isAuth && (
+                <Link className='navbar__link' to='/login'>
+                  Вход/Регистрация
+                </Link>
+              )}
+              {isAuth && (
+                <a
+                  className='navbar__link'
+                  onClick={() => {
+                    authStore.logout();
+                    navigate('/');
+                  }}
+                >
+                  Выйти
+                </a>
+              )}
             </li>
           </ul>
         </Nav>

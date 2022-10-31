@@ -1,10 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import { emailRegExp } from '../../utils';
+import { emailRegExp } from '../../utils/reg-exp';
+import Toast from 'react-bootstrap/Toast';
 import InputMask from 'react-input-mask';
-import './index.scss';
 import authStore from '../../store/auth';
+
+import './index.scss';
 
 const RegisterPage = () => {
   const {
@@ -13,9 +16,16 @@ const RegisterPage = () => {
     control,
     formState: { errors },
   } = useForm();
+  const [showToast, setShowToast] = useState(false);
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    await authStore.register(data);
+    try {
+      await authStore.register(data);
+    } catch (e) {
+      setShowToast(true);
+      return;
+    }
     navigate('/');
   };
 
@@ -189,6 +199,15 @@ const RegisterPage = () => {
           </div>
         </div>
       </div>
+      <Toast
+        className='mx-auto fixed-center bg-danger text-white text-center'
+        onClose={() => setShowToast(false)}
+        show={showToast}
+        delay={3000}
+        autohide
+      >
+        <Toast.Body>Такой пользователь уже существует</Toast.Body>
+      </Toast>
     </div>
   );
 };

@@ -5,6 +5,7 @@
   &__link {
     color: var(--link-color);
     text-decoration: none;
+    cursor: pointer;
     & + & {
       margin-left: 60px;
     }

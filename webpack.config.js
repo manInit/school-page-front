@@ -83,12 +83,12 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'public'),
     },
-    proxy: [
-      {
-        context: () => true,
-        '/': 'http://92.63.101.204:8080',
-      }
-    ],
+    // proxy: [
+    //   {
+    //     context: () => true,
+    //     '/': 'http://92.63.101.204:8080',
+    //   }
+    // ],
     historyApiFallback: true,
     open: true,
     hot: true,

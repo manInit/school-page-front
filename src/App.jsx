@@ -16,8 +16,8 @@ function App() {
         <Routes>
           <Route path='/login' element={<AuthPage />} />
           <Route path='/register' element={<RegisterPage />} />
-          <Route exact path='/' element={<PrivateRoute/>}>
-            <Route exact path='/' element={<EventPage/>}/>
+          <Route exact path='/' element={<PrivateRoute />}>
+            <Route exact path='/' element={<EventPage />} />
           </Route>
         </Routes>
       </Router>
