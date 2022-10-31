@@ -10,6 +10,7 @@ class EventsStore {
 
   async fetchEvents() {
     this.events = await getAllEvents();
+    return this.events;
   }
 }
 

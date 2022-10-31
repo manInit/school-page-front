@@ -36,6 +36,7 @@ const EventPage = observer(() => {
   useEffect(() => {
     eventStore.fetchEvents();
   }, []);
+  
   const events = eventStore.events;
   return (
     <>

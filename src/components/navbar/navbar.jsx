@@ -21,16 +21,22 @@ const NavbarLink = ({ className }) => {
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='ms-auto'>
-          <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
+          <ul className='navbar-nav me-auto mb-2 mb-lg-0 d-flex'>
             <li className='nav-item'>
               <Link className='navbar__link' to='/'>
                 Мероприятия
               </Link>
             </li>
-            <li className='nav-item mx-lg-4'>
-              <Link className='navbar__link' to='/my'>
-                Личный кабинет
-              </Link>
+            <li className='nav-item'>
+              <a
+                className='navbar__link'
+                onClick={() => {
+                  authStore.loginAsAdmin();
+                  navigate('/');
+                }}
+              >
+                Войти как админ
+              </a>
             </li>
             <li className='nav-item'>
               {!isAuth && (

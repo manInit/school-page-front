@@ -16,6 +16,11 @@ class AuthStore {
     this.isAuth = false;
   }
 
+  loginAsAdmin() {
+    this.isAdmin = true;
+    this.isAuth = true;
+  }
+
   async login({ username, password }) {
     const loginData = await loginRequest({ username, password });
     if (!loginData.token) {
