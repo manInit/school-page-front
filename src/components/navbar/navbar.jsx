@@ -13,10 +13,12 @@ const NavbarLink = ({ className }) => {
 
   return (
     <Navbar expand='lg' className={'w-100 d-flex ' + className}>
-      <Navbar.Brand href='/'>
-        <div className='header__logo flex-grow-1'>
-          <IstuLogo />
-        </div>
+      <Navbar.Brand>
+        <Link to='/'>
+          <div className='header__logo flex-grow-1'>
+            <IstuLogo />
+          </div>
+        </Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>

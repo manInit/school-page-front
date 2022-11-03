@@ -39,7 +39,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     assetModuleFilename: 'images/[hash][ext][query]',
     clean: true,
-    filename: '[name].[contenthash].js'
+    filename: '[name].[contenthash].js',
   },
   module: {
     rules: [
@@ -83,12 +83,13 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'public'),
     },
-    // proxy: [
-    //   {
-    //     context: () => true,
-    //     '/': 'http://92.63.101.204:8080',
-    //   }
-    // ],
+    proxy: {
+      '/api': {
+        target: 'http://92.63.101.204:8080',
+        secure: false,
+        changeOrigin: true,
+      }
+    },
     historyApiFallback: true,
     open: true,
     hot: true,
