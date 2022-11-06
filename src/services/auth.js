@@ -6,6 +6,6 @@ export async function loginRequest(data) {
 }
 
 export async function registerRequest(data) {
-  const response = await axios.post('/api/registration', data);
+  const response = await axios.post('/api/register', data);
   return response;
 }
