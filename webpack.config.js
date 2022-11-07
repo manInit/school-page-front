@@ -80,13 +80,12 @@ module.exports = {
   },
   devtool: isDev ? 'source-map' : false,
   devServer: {
-    port: 3000,
     static: {
       directory: path.join(__dirname, 'public'),
     },
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:8080',
+        target: 'http://92.63.101.204/',
         secure: false,
         changeOrigin: true,
       }

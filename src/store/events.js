@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { getAllEvents, createEvent, changeEvent, deleteEvent } from '../services/events';
+import { getAllEvents, createEvent, updateInfoEvent} from '../services/events';
 
 class EventsStore {
   events = [];
@@ -19,7 +19,7 @@ class EventsStore {
     }
   }
   async changeEvent(event){
-    const result = await changeEvent(event);
+    const result = await updateInfoEvent(event);
     if(result){
       this.events = this.events.map((event)=>{
         if (result.id==event.id)
