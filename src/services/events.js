@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from './axios-default';
 
 export async function getAllEvents() {
   const { data } = await axios.get('/api/activities');
