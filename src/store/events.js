@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import { getAllEvents } from '../services/events';
+import { getAllEvents, createEvent, changeEvent, deleteEvent } from '../services/events';
 
 class EventsStore {
   events = [];
@@ -11,6 +11,23 @@ class EventsStore {
   async fetchEvents() {
     this.events = await getAllEvents();
     return this.events;
+  }
+  async createEvent(event){
+    const result = await createEvent(event);
+    if(result){
+      this.events.push(event);
+    }
+  }
+  async changeEvent(event){
+    const result = await changeEvent(event);
+    if(result){
+      this.events = this.events.map((event)=>{
+        if (result.id==event.id)
+          return result;
+        else 
+          return event;
+      });  
+    }
   }
 }
 

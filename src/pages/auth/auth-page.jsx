@@ -2,7 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { emailRegExp } from '../../utils/reg-exp';
 import Toast from 'react-bootstrap/Toast';
 import authStore from '../../store/auth';
 
@@ -37,8 +36,7 @@ const AuthPage = () => {
               <div>
                 <input
                   {...register('username', {
-                    required: true,
-                    pattern: emailRegExp,
+                    required: true
                   })}
                   id='login-email'
                   type='text'
