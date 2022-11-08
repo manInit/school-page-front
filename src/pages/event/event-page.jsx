@@ -32,6 +32,11 @@ const EventPage = observer(() => {
       setModalOptions({ ...modalOptions, backdrop: true, keyboard: true });
       setModalActive(true);
     };
+  const showEventRegisteredModal = (event) => {
+    setModalContent(<EventInfoRegistered event={event}></EventInfoRegistered>);
+    setModalOptions({ ...modalOptions, backdrop: true, keyboard: true });
+    setModalActive(true);
+  }
   const handleClose = () => {
     setModalActive(false);
   };
@@ -94,6 +99,7 @@ const EventPage = observer(() => {
                 event={event}
                 isAdmin={isAdmin}
                 showModalFunction={showEventInfoModal}
+                showEventRegisteredModal={showEventRegisteredModal}
               ></EventElement>
             );
           })}
