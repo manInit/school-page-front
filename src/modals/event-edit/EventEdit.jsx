@@ -7,12 +7,14 @@ import MDEditor from '@uiw/react-md-editor';
 import './index.scss';
 
 const EventEdit = ({ event, closeModal }) => {
-  const { register,
+  const {
+    register,
     handleSubmit,
     control,
-    formState: { errors }
+    formState: { errors },
   } = useForm();
-  const { //MDEditor form control
+  const {
+    //MDEditor form control
     field: { onChange, value },
   } = useController({
     name: 'description',
@@ -28,34 +30,35 @@ const EventEdit = ({ event, closeModal }) => {
       if (isAddingEvent) {
         eventStore.createEvent(data);
         closeModal();
-      }
-      else {
+      } else {
+        data.id = event.id;
         eventStore.changeEvent(data);
         closeModal();
       }
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
   };
 
-  const deleteEvent = () => {
-
-  };
+  const deleteEvent = () => {};
   return (
     <>
-      <h2 className='text-center'>{isAddingEvent ? 'Создание мероприятия' : 'Редактирование мероприятия'}</h2>
+      <h2 className='text-center'>
+        {isAddingEvent ? 'Создание мероприятия' : 'Редактирование мероприятия'}
+      </h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div style={{ width: '80%', marginLeft: '10%' }}>
           <div>
             <input
               {...register('name', {
                 required: true,
-                value: event?.name
+                value: event?.name,
               })}
-              className='form-control brick' type='text'
+              className='form-control brick'
+              type='text'
               style={{ fontSize: '1.8em' }}
-              placeholder='Название' />
+              placeholder='Название'
+            />
             {errors.name && (
               <div className='ms-2 invalid-feedback d-block'>
                 Название мероприятия не должно быть пустым
@@ -64,10 +67,7 @@ const EventEdit = ({ event, closeModal }) => {
           </div>
           <div className='mt-3'>
             Описание:
-            <MDEditor
-              value={value}
-              onChange={onChange}
-            />
+            <MDEditor value={value} onChange={onChange} />
             {errors.description && (
               <div className='ms-2 invalid-feedback d-block'>
                 Описание мероприятия не должно быть пустым
@@ -87,10 +87,12 @@ const EventEdit = ({ event, closeModal }) => {
               <input
                 {...register('startDate', {
                   required: true,
-                  value: event?.startDate
+                  value: event?.startDate,
                 })}
-                className='form-control' type='text'
-                placeholder='Дата начала' />
+                className='form-control'
+                type='text'
+                placeholder='Дата начала'
+              />
               {errors.startDate && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
@@ -103,10 +105,12 @@ const EventEdit = ({ event, closeModal }) => {
               <input
                 {...register('endDate', {
                   required: true,
-                  value: event?.endDate
+                  value: event?.endDate,
                 })}
-                className='form-control' type='text'
-                placeholder='Дата завершения' />
+                className='form-control'
+                type='text'
+                placeholder='Дата завершения'
+              />
               {errors.endDate && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
@@ -119,10 +123,12 @@ const EventEdit = ({ event, closeModal }) => {
               <input
                 {...register('participationPoint', {
                   required: true,
-                  value: event?.participationPoint
+                  value: event?.participationPoint,
                 })}
-                className='form-control' type='text'
-                placeholder='Баллы' />
+                className='form-control'
+                type='text'
+                placeholder='Баллы'
+              />
               {errors.participationPoint && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
@@ -143,10 +149,12 @@ const EventEdit = ({ event, closeModal }) => {
               <input
                 {...register('maxParticipants', {
                   required: true,
-                  value: event?.maxParticipants
+                  value: event?.maxParticipants,
                 })}
-                className='form-control' type='text'
-                placeholder='Количество участников' />
+                className='form-control'
+                type='text'
+                placeholder='Количество участников'
+              />
               {errors.maxParticipants && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
@@ -159,10 +167,12 @@ const EventEdit = ({ event, closeModal }) => {
               <input
                 {...register('activityType', {
                   required: true,
-                  value: event?.activityType
+                  value: event?.activityType,
                 })}
-                className='form-control' type='text'
-                placeholder='Тип мероприятия' />
+                className='form-control'
+                type='text'
+                placeholder='Тип мероприятия'
+              />
               {errors.activityType && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
@@ -172,21 +182,27 @@ const EventEdit = ({ event, closeModal }) => {
           </div>
           <input
             className='btn btn-light my-3 me-auto me-3'
-            onClick={() => { handleSubmit(); }}
+            onClick={() => {
+              handleSubmit();
+            }}
             style={{ width: '150px' }}
             type='submit'
             value={'Сохранить'}
           />
           <input
             className='btn btn-light my-3 me-auto me-3'
-            onClick={() => { closeModal(); }}
+            onClick={() => {
+              closeModal();
+            }}
             style={{ width: '150px' }}
             type={'button'}
             value={'Отменить'}
           />
           <input
             className='btn btn-danger my-3 me-auto me-3'
-            onClick={() => { deleteEvent(); }}
+            onClick={() => {
+              deleteEvent();
+            }}
             style={{ width: '150px' }}
             type={'button'}
             value={'Удалить'}

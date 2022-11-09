@@ -56,8 +56,7 @@ export async function createEvent(event) {
  * @return {event} Return object updated event
  */
 export async function updateInfoEvent(event) {
-  event.id = 1
-  const { data } = await axios.put('/api/activities/create', event);
+  const { data } = await axios.put('/api/activities', event);
   return data;
 }
 
