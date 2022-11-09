@@ -4,12 +4,13 @@ import { Card, Table, ToggleButton } from 'react-bootstrap';
 
 import './index.scss';
 import { observer } from 'mobx-react-lite';
-import axios from 'axios';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import eventsStore from '../../store/events';
 
 const EventInfoRegistered = observer(({ event }) => {
   const eventData = {
+    id: event.id,
     name: event.name,
     description: event.description,
     date: event.date,
@@ -31,18 +32,9 @@ const EventInfoRegistered = observer(({ event }) => {
       id={'toggle_checkbox' + key}
       variant='outline-secondary'
       checked={toggleActive[key]}
-      onChange={() => {
-        axios
-          .post(`api/activities/${elem.id}/appointment`, {
-            user_id: elem.id,
-            status: !toggleActive[key],
-          })
-          .then(() => {
-            setToggleActive((arr) => ({ ...arr, [key]: !toggleActive[key] }));
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+      onChange={async () => {
+        await eventsStore.checkUsers(elem.id, eventData.id);
+        setToggleActive((arr) => ({ ...arr, [key]: !toggleActive[key] }));
       }}
     >
       <FontAwesomeIcon
@@ -80,7 +72,7 @@ const EventInfoRegistered = observer(({ event }) => {
               <tr key={i}>
                 <td>{elem.surname}</td>
                 <td>{elem.name}</td>
-                <td>{elem.patronym}</td>
+                <td>{elem.fatherName}</td>
                 <td>{viewInfoBtn(elem, i)}</td>
               </tr>
             ))}

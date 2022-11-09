@@ -6,25 +6,8 @@ import axios from './axios-default';
  */
 export async function getAllEvents() {
   const { data } = await axios.get('/api/activities');
-  return data.map((event, index) => ({
+  return data.map((event) => ({
     ...event,
-    users: [
-      {
-        name: 'Имя' + index,
-        surname: 'Фамилия',
-        patronym: 'Отчество',
-      },
-      {
-        name: 'Имя2' + index,
-        surname: 'Фамилия',
-        patronym: 'Отчество',
-      },
-      {
-        name: 'Имя2' + index,
-        surname: 'Фамилия',
-        patronym: 'Отчество',
-      },
-    ],
   }));
 }
 /**
@@ -71,5 +54,17 @@ export async function appointmentSchoolchildOnEvent(shcoolchildId, activityId) {
     shcoolchildId,
     activityId,
   });
+  return data;
+}
+
+/**
+ * Get all users registered on event by id event
+ * @param {number} eventId Event id where users get
+ * @returns Array of users registered on event
+ */
+export async function getRegisteredUsersOnEvent(eventId) {
+  const { data } = await axios.get(
+    `/api/schoolchildren/registered?activityId=${eventId}`
+  );
   return data;
 }
