@@ -1,9 +1,12 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, Card, Table } from 'react-bootstrap';
+import { Card, Table, ToggleButton } from 'react-bootstrap';
 
 import './index.scss';
 import { observer } from 'mobx-react-lite';
+import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const EventInfoRegistered = observer(({ event }) => {
   const eventData = {
@@ -12,12 +15,41 @@ const EventInfoRegistered = observer(({ event }) => {
     date: event.date,
     from_ball: event.participationPoint,
   };
-
+  useEffect(() => {
+    console.log(toggleActive);
+  });
   const accounts_data = event.users;
-  const viewInfoBtn = (
-    <Button variant='secondary'>
-      <FontAwesomeIcon icon='fa-solid fa-eye' />
-    </Button>
+  const [toggleActive, setToggleActive] = useState(
+    accounts_data.map((elem) => {
+      return !!elem.appointment;
+    })
+  );
+  const viewInfoBtn = (elem, key) => (
+    <ToggleButton
+      key={key}
+      type='checkbox'
+      id={'toggle_checkbox' + key}
+      variant='outline-secondary'
+      checked={toggleActive[key]}
+      onChange={() => {
+        axios
+          .post(`api/activities/${elem.id}/appointment`, {
+            user_id: elem.id,
+            status: !toggleActive[key],
+          })
+          .then(() => {
+            setToggleActive((arr) => ({ ...arr, [key]: !toggleActive[key] }));
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }}
+    >
+      <FontAwesomeIcon
+        style={{ width: '2em' }}
+        icon={toggleActive[key] ? 'fa-check' : 'fa-xmark'}
+      />
+    </ToggleButton>
   );
 
   return (
@@ -40,6 +72,7 @@ const EventInfoRegistered = observer(({ event }) => {
               <td>Фамилия</td>
               <td>Имя</td>
               <td>Отчество</td>
+              <td>Присутствие</td>
             </tr>
           </thead>
           <tbody>
@@ -48,7 +81,7 @@ const EventInfoRegistered = observer(({ event }) => {
                 <td>{elem.surname}</td>
                 <td>{elem.name}</td>
                 <td>{elem.patronym}</td>
-                <td>{viewInfoBtn}</td>
+                <td>{viewInfoBtn(elem, i)}</td>
               </tr>
             ))}
           </tbody>

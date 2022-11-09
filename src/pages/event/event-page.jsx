@@ -4,6 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-bootstrap/Modal';
 import EventElement from '../../components/event-element/event-element';
 import EventEdit from '../../modals/event-edit/EventEdit';
+import EventInfoRegistered from '../../modals/registered-students-info/registered-students';
 import EventInfo from '../../modals/event-info/event-info';
 import eventStore from '../../store/events';
 import authStore from '../../store/auth';
@@ -42,6 +43,11 @@ const EventPage = observer(() => {
         setModalOptions({ ...modalOptions, backdrop: true, keyboard: true });
         setModalActive(true);
       };
+  const showEventRegisteredModal = (event) => {
+    setModalContent(<EventInfoRegistered event={event}></EventInfoRegistered>);
+    setModalOptions({ ...modalOptions, backdrop: true, keyboard: true });
+    setModalActive(true);
+  };
   const handleClose = () => {
     setModalActive(false);
   };
@@ -103,6 +109,7 @@ const EventPage = observer(() => {
                 event={event}
                 isAdmin={isAdmin}
                 showModalFunction={showEventInfoModal}
+                showEventRegisteredModal={showEventRegisteredModal}
               ></EventElement>
             );
           })}
