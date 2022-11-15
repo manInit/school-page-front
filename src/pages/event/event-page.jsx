@@ -11,6 +11,7 @@ import authStore from '../../store/auth';
 import { observer } from 'mobx-react-lite';
 
 import './index.scss';
+import SearchBar from '../../components/search_bar/search_bar';
 
 const EventPage = observer(() => {
   const [isModalActive, setModalActive] = useState(false);
@@ -57,6 +58,9 @@ const EventPage = observer(() => {
   }, []);
 
   const events = eventStore.events;
+  console.log(events)
+  const [searchResults, setSearchResults] = useState(events);
+  console.log(searchResults)
   return (
     <>
       <Modal
@@ -91,6 +95,11 @@ const EventPage = observer(() => {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
+          <SearchBar
+            elem={events}
+            setSearchResults={setSearchResults}
+            type={'name'}
+          />
           {isAdmin && (
             <div
               className='btn btn-light'
@@ -102,7 +111,7 @@ const EventPage = observer(() => {
           )}
         </div>
         <div className='event-page-content container-fluid mt-3'>
-          {events.map((event) => {
+          {searchResults.map((event) => {
             return (
               <EventElement
                 key={event.id}
