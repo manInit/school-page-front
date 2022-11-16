@@ -3,7 +3,7 @@ import { registerRequest, loginRequest } from '../services/auth';
 
 class AuthStore {
   isAuth = false;
-  isAdmin = true;
+  isAdmin = false;
   token = '';
 
   constructor() {
@@ -71,6 +71,7 @@ class AuthStore {
     if (!registerData.token) {
       // TODO: token or auth??
     }
+    localStorage.setItem('token', this.token);
     return this.token;
   }
 }

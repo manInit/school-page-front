@@ -30,17 +30,6 @@ const NavbarLink = ({ className }) => {
               </Link>
             </li>
             <li className='nav-item'>
-              <a
-                className='navbar__link'
-                onClick={() => {
-                  authStore.loginAsAdmin();
-                  navigate('/');
-                }}
-              >
-                Войти как админ
-              </a>
-            </li>
-            <li className='nav-item'>
               {!isAuth && (
                 <Link className='navbar__link' to='/login'>
                   Вход/Регистрация

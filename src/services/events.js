@@ -27,7 +27,7 @@ export async function createEvent(event) {
 }
 
 /**
- * update activity
+ * Update activity
  * @param {number} event.id Id of update event
  * @param {string} event.name Name of event
  * @param {string} event.description Description of event
@@ -45,13 +45,13 @@ export async function updateInfoEvent(event) {
 
 /**
  * Mark the presence schooler on activity
- * @param {number} shcoolchildId Id of schoolchild
+ * @param {number} schoolchildId Id of schoolchild
  * @param {number} activityId Id of event
  * @return {Object} Empty object
  */
-export async function appointmentSchoolchildOnEvent(shcoolchildId, activityId) {
+export async function appointmentSchoolchildOnEvent(schoolchildId, activityId) {
   const { data } = await axios.post('/api/activities/appointment', {
-    shcoolchildId,
+    schoolchildId,
     activityId,
   });
   return data;
@@ -66,5 +66,19 @@ export async function getRegisteredUsersOnEvent(eventId) {
   const { data } = await axios.get(
     `/api/schoolchildren/registered?activityId=${eventId}`
   );
+  return data;
+}
+
+/**
+ * Register schooler on activity
+ * @param {number} schoolchildId Schooler id
+ * @param {number} studyActivityId Event id
+ * @returns Object user and activity
+ */
+export async function registerOnActivity(schoolchildId, studyActivityId) {
+  const { data } = await axios.post('/api/activities/register', {
+    schoolchildId,
+    studyActivityId,
+  });
   return data;
 }
