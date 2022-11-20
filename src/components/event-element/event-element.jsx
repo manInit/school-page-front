@@ -2,7 +2,12 @@ import React from 'react';
 
 import './index.scss';
 
-const EventElement = ({ event, isAdmin, showModalFunction, showEventRegisteredModal}) => {
+const EventElement = ({
+  event,
+  isAdmin,
+  showModalFunction,
+  showEventRegisteredModal,
+}) => {
   const actionDescription = isAdmin ? 'Подробнее' : 'Подать заявку';
   return (
     <div className='event-element mb-4 row'>

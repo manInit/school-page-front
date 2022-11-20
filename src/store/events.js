@@ -5,6 +5,7 @@ import {
   updateInfoEvent,
   getRegisteredUsersOnEvent,
   appointmentSchoolchildOnEvent,
+  registerOnActivity,
 } from '../services/events';
 import authStore from './auth';
 
@@ -50,6 +51,11 @@ class EventsStore {
         return event;
       });
     }
+  }
+
+  async registerStudent(schoolId, activityId) {
+    const result = await registerOnActivity(schoolId, activityId);
+    console.log(result);
   }
 }
 

@@ -75,10 +75,10 @@ export async function getRegisteredUsersOnEvent(eventId) {
  * @param {number} studyActivityId Event id
  * @returns Object user and activity
  */
-export async function registerOnActivity(schoolchildId, studyActivityId) {
+export async function registerOnActivity(schoolchildId, activityId) {
   const { data } = await axios.post('/api/activities/register', {
     schoolchildId,
-    studyActivityId,
+    activityId,
   });
   return data;
 }

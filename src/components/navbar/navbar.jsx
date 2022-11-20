@@ -11,6 +11,11 @@ const NavbarLink = ({ className }) => {
   const navigate = useNavigate();
   const isAuth = authStore.isAuth;
 
+  const logout = () => {
+    authStore.logout();
+    navigate('/login');
+  };
+
   return (
     <Navbar expand='lg' className={'w-100 d-flex ' + className}>
       <Navbar.Brand>
@@ -38,10 +43,7 @@ const NavbarLink = ({ className }) => {
               {isAuth && (
                 <a
                   className='navbar__link'
-                  onClick={() => {
-                    authStore.logout();
-                    navigate('/');
-                  }}
+                  onClick={logout}
                 >
                   Выйти
                 </a>

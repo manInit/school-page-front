@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import { React, useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-bootstrap/Modal';
@@ -6,12 +5,12 @@ import EventElement from '../../components/event-element/event-element';
 import EventEdit from '../../modals/event-edit/EventEdit';
 import EventInfoRegistered from '../../modals/registered-students-info/registered-students';
 import EventInfo from '../../modals/event-info/event-info';
+import SearchBar from '../../components/search-bar/search-bar';
 import eventStore from '../../store/events';
 import authStore from '../../store/auth';
 import { observer } from 'mobx-react-lite';
 
 import './index.scss';
-import SearchBar from '../../components/search_bar/search_bar';
 
 const EventPage = observer(() => {
   const [isModalActive, setModalActive] = useState(false);
@@ -22,6 +21,7 @@ const EventPage = observer(() => {
     keyboard: true,
   });
   const isAdmin = authStore.isAdmin;
+  const isAuth = authStore.isAuth;
   const showEventAddModal = () => {
     setModalContent(<EventEdit closeModal={handleClose}></EventEdit>);
     setModalOptions({ ...modalOptions, backdrop: 'static', keyboard: false });
@@ -29,21 +29,21 @@ const EventPage = observer(() => {
   };
   const showEventInfoModal = isAdmin
     ? (event) => {
-        setModalContent(
-          <EventEdit event={event} closeModal={handleClose}></EventEdit>
-        );
-        setModalOptions({
-          ...modalOptions,
-          backdrop: 'static',
-          keyboard: false,
-        });
-        setModalActive(true);
-      }
+      setModalContent(
+        <EventEdit event={event} closeModal={handleClose}></EventEdit>
+      );
+      setModalOptions({
+        ...modalOptions,
+        backdrop: 'static',
+        keyboard: false,
+      });
+      setModalActive(true);
+    }
     : (event) => {
-        setModalContent(<EventInfo event={event}></EventInfo>);
-        setModalOptions({ ...modalOptions, backdrop: true, keyboard: true });
-        setModalActive(true);
-      };
+      setModalContent(<EventInfo event={event} isAuth={isAuth}></EventInfo>);
+      setModalOptions({ ...modalOptions, backdrop: true, keyboard: true });
+      setModalActive(true);
+    };
   const showEventRegisteredModal = (event) => {
     setModalContent(<EventInfoRegistered event={event}></EventInfoRegistered>);
     setModalOptions({ ...modalOptions, backdrop: true, keyboard: true });
@@ -58,9 +58,8 @@ const EventPage = observer(() => {
   }, []);
 
   const events = eventStore.events;
-  console.log(events)
   const [searchResults, setSearchResults] = useState(events);
-  console.log(searchResults)
+
   return (
     <>
       <Modal

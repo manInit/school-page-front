@@ -5,7 +5,6 @@ import { Card, Table, ToggleButton } from 'react-bootstrap';
 import './index.scss';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
-import { useEffect } from 'react';
 import eventsStore from '../../store/events';
 
 const EventInfoRegistered = observer(({ event }) => {
@@ -16,14 +15,9 @@ const EventInfoRegistered = observer(({ event }) => {
     date: event.date,
     from_ball: event.participationPoint,
   };
-  useEffect(() => {
-    console.log(toggleActive);
-  });
   const accounts_data = event.users;
   const [toggleActive, setToggleActive] = useState(
-    accounts_data.map((elem) => {
-      return !!elem.appointment;
-    })
+    accounts_data.map((elem) => Boolean(elem.appointment))
   );
   const viewInfoBtn = (elem, key) => (
     <ToggleButton
