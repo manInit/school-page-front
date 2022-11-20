@@ -26,7 +26,7 @@ const EventInfoRegistered = observer(({ event }) => {
 
   const [accountsData, setAccountsData] = useState([]);
   const [toggleActive, setToggleActive] = useState(
-    accountsData.map((elem) => Boolean(elem.appointment))
+    accountsData.map((elem) => Boolean(elem.attendActivity))
   );
   const viewInfoBtn = (elem, key) => (
     <ToggleButton
