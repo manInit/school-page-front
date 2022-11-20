@@ -5,7 +5,7 @@ import eventsStore from '../../store/events';
 
 import './index.scss';
 
-const EventInfo = ({ event, isAuth }) => {
+const EventInfo = ({ event, isAuth, closeModal }) => {
   const eventData = {
     name: event.name,
     description: event.description,
@@ -17,6 +17,7 @@ const EventInfo = ({ event, isAuth }) => {
     const eventId = event.id;
     const userId = authStore.userId;
     await eventsStore.registerStudent(userId, eventId);
+    closeModal();
   };
 
   return (

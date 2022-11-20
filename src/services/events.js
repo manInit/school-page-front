@@ -82,3 +82,8 @@ export async function registerOnActivity(schoolchildId, activityId) {
   });
   return data;
 }
+
+export async function deleteEvent(eventId) {
+  const { data } = await axios.delete(`/api/activities/${eventId}`);
+  return data;
+}

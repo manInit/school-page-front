@@ -40,7 +40,7 @@ const EventPage = observer(() => {
       setModalActive(true);
     }
     : (event) => {
-      setModalContent(<EventInfo event={event} isAuth={isAuth}></EventInfo>);
+      setModalContent(<EventInfo event={event} isAuth={isAuth} closeModal={handleClose}></EventInfo>);
       setModalOptions({ ...modalOptions, backdrop: true, keyboard: true });
       setModalActive(true);
     };
@@ -52,14 +52,19 @@ const EventPage = observer(() => {
   const handleClose = () => {
     setModalActive(false);
   };
+  
+  const [searchResults, setSearchResults] = useState([]);
+  const events = eventStore.events;
 
   useEffect(() => {
-    eventStore.fetchEvents();
+    const fetch = async () => {
+      const events = await eventStore.fetchEvents();
+      setSearchResults(events);
+    };
+    fetch();
   }, []);
 
-  const events = eventStore.events;
-  const [searchResults, setSearchResults] = useState(events);
-
+  
   return (
     <>
       <Modal

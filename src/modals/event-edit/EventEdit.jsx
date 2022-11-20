@@ -40,7 +40,10 @@ const EventEdit = ({ event, closeModal }) => {
     }
   };
 
-  const deleteEvent = () => {};
+  const deleteEvent = async () => {
+    await eventStore.removeEvent(event.id);
+    closeModal();
+  };
   return (
     <>
       <h2 className='text-center'>
@@ -198,15 +201,17 @@ const EventEdit = ({ event, closeModal }) => {
             type={'button'}
             value={'Отменить'}
           />
-          <input
-            className='btn btn-danger my-3 me-auto me-3'
-            onClick={() => {
-              deleteEvent();
-            }}
-            style={{ width: '150px' }}
-            type={'button'}
-            value={'Удалить'}
-          />
+          {!isAddingEvent && (
+            <input
+              className='btn btn-danger my-3 me-auto me-3'
+              onClick={() => {
+                deleteEvent();
+              }}
+              style={{ width: '150px' }}
+              type={'button'}
+              value={'Удалить'}
+            />
+          )}
         </div>
       </form>
     </>

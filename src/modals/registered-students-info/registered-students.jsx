@@ -6,6 +6,7 @@ import './index.scss';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import eventsStore from '../../store/events';
+import { useEffect } from 'react';
 
 const EventInfoRegistered = observer(({ event }) => {
   const eventData = {
@@ -15,9 +16,17 @@ const EventInfoRegistered = observer(({ event }) => {
     date: event.date,
     from_ball: event.participationPoint,
   };
-  const accounts_data = event.users;
+  useEffect(() => {
+    const fetch = async () => {
+      const users = await eventsStore.fetchRegisteredStudent(event.id);
+      setAccountsData(users);
+    };
+    fetch();
+  }, []);
+
+  const [accountsData, setAccountsData] = useState([]);
   const [toggleActive, setToggleActive] = useState(
-    accounts_data.map((elem) => Boolean(elem.appointment))
+    accountsData.map((elem) => Boolean(elem.appointment))
   );
   const viewInfoBtn = (elem, key) => (
     <ToggleButton
@@ -62,7 +71,7 @@ const EventInfoRegistered = observer(({ event }) => {
             </tr>
           </thead>
           <tbody>
-            {accounts_data.map((elem, i) => (
+            {accountsData.map((elem, i) => (
               <tr key={i}>
                 <td>{elem.surname}</td>
                 <td>{elem.name}</td>

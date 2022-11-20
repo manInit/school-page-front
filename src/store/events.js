@@ -6,6 +6,7 @@ import {
   getRegisteredUsersOnEvent,
   appointmentSchoolchildOnEvent,
   registerOnActivity,
+  deleteEvent,
 } from '../services/events';
 import authStore from './auth';
 
@@ -16,17 +17,16 @@ class EventsStore {
     makeAutoObservable(this);
   }
 
+  async fetchRegisteredStudent(eventId) {
+    if (authStore.isAdmin) {
+      const users = await getRegisteredUsersOnEvent(eventId);
+      this.events.find((event) => event.id === eventId).users = users;
+      return users;
+    }
+  }
+
   async fetchEvents() {
     const events = await getAllEvents();
-    if (authStore.isAdmin) {
-      for (let i = 0; i < events.length; i++) {
-        const users = await getRegisteredUsersOnEvent(events[i].id);
-        events[i] = {
-          ...events[i],
-          users,
-        };
-      }
-    }
     this.events = events;
     return this.events;
   }
@@ -41,6 +41,11 @@ class EventsStore {
   async checkUsers(userId, eventId) {
     const result = await appointmentSchoolchildOnEvent(userId, eventId);
     return result;
+  }
+
+  async removeEvent(eventId) {
+    await deleteEvent(eventId);
+    this.events = this.events.filter((event) => event.id !== eventId);
   }
 
   async changeEvent(event) {
