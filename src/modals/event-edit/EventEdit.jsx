@@ -1,8 +1,9 @@
-import { React } from 'react';
-import { Card } from 'react-bootstrap';
+import { React, useState } from 'react';
+import { Card, Modal } from 'react-bootstrap';
 import eventStore from '../../store/events';
 import { useForm, useController } from 'react-hook-form';
 import MDEditor from '@uiw/react-md-editor';
+import { dateRegExp, positiveIntegerRegExp } from '../../utils/reg-exp';
 
 import './index.scss';
 
@@ -23,6 +24,13 @@ const EventEdit = ({ event, closeModal }) => {
     defaultValue: event?.description,
   });
 
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const handleConfirmOpen = () => {
+    setShowConfirmModal(true);
+  };
+  const handleConfirmClose = () => {
+    setShowConfirmModal(false);
+  };
   const isAddingEvent = event == null;
 
   const onSubmit = (data) => {
@@ -30,7 +38,8 @@ const EventEdit = ({ event, closeModal }) => {
       if (isAddingEvent) {
         eventStore.createEvent(data);
         closeModal();
-      } else {
+      }
+      else {
         data.id = event.id;
         eventStore.changeEvent(data);
         closeModal();
@@ -40,15 +49,41 @@ const EventEdit = ({ event, closeModal }) => {
     }
   };
 
-  const deleteEvent = async () => {
-    await eventStore.removeEvent(event.id);
-    closeModal();
+  const deleteEvent = () => {
+    eventStore.removeEvent(event.id);
   };
   return (
     <>
-      <h2 className='text-center'>
-        {isAddingEvent ? 'Создание мероприятия' : 'Редактирование мероприятия'}
-      </h2>
+      <div className='dialog-modal-level2-fade' style={{ display: showConfirmModal ? 'block' : 'none' }}>
+      </div>
+      <Modal
+        className='dialog-modal-level2'
+        show={showConfirmModal}
+        size={'sm'}
+        backdrop={false}
+        onHide={handleConfirmClose}
+        centered>
+        <div className='text-center mt-3 mb-3'>
+          Подтвердите действие
+        </div>
+        <div className='d-flex'>
+          <input
+            className='btn btn-danger my-3 ms-3 me-3'
+            onClick={() => { deleteEvent(); }}
+            style={{ width: '150px' }}
+            type={'button'}
+            value={'Удалить'}
+          />
+          <input
+            className='btn btn-light my-3 ms-3 me-3'
+            onClick={() => { handleConfirmClose(); }}
+            style={{ width: '150px' }}
+            type={'button'}
+            value={'Отмена'}
+          />
+        </div>
+      </Modal>
+      <h2 className='text-center'>{isAddingEvent ? 'Создание мероприятия' : 'Редактирование мероприятия'}</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div style={{ width: '80%', marginLeft: '10%' }}>
           <div>
@@ -91,14 +126,18 @@ const EventEdit = ({ event, closeModal }) => {
                 {...register('startDate', {
                   required: true,
                   value: event?.startDate,
+                  pattern: dateRegExp
                 })}
-                className='form-control'
-                type='text'
-                placeholder='Дата начала'
-              />
-              {errors.startDate && (
+                className='form-control' type='text'
+                placeholder='Дата начала' />
+              {errors.startDate?.type === 'required' && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
+                </div>
+              )}
+              {errors.startDate?.type === 'pattern' && (
+                <div className='invalid-feedback d-block'>
+                  Введите дату в формате ДД-ММ-ГГГГ
                 </div>
               )}
             </Card>
@@ -109,14 +148,18 @@ const EventEdit = ({ event, closeModal }) => {
                 {...register('endDate', {
                   required: true,
                   value: event?.endDate,
+                  pattern: dateRegExp
                 })}
-                className='form-control'
-                type='text'
-                placeholder='Дата завершения'
-              />
-              {errors.endDate && (
+                className='form-control' type='text'
+                placeholder='Дата завершения' />
+              {errors.endDate?.type === 'required' && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
+                </div>
+              )}
+              {errors.endDate?.type === 'pattern' && (
+                <div className='invalid-feedback d-block'>
+                  Введите дату в формате ДД-ММ-ГГГГ
                 </div>
               )}
             </Card>
@@ -127,14 +170,18 @@ const EventEdit = ({ event, closeModal }) => {
                 {...register('participationPoint', {
                   required: true,
                   value: event?.participationPoint,
+                  pattern: positiveIntegerRegExp
                 })}
-                className='form-control'
-                type='text'
-                placeholder='Баллы'
-              />
-              {errors.participationPoint && (
+                className='form-control' type='text'
+                placeholder='Баллы' />
+              {errors.participationPoint?.type === 'required' && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
+                </div>
+              )}
+              {errors.participationPoint?.type === 'pattern' && (
+                <div className='invalid-feedback d-block'>
+                  Введите правильное значение
                 </div>
               )}
             </Card>
@@ -153,14 +200,18 @@ const EventEdit = ({ event, closeModal }) => {
                 {...register('maxParticipants', {
                   required: true,
                   value: event?.maxParticipants,
+                  pattern: positiveIntegerRegExp
                 })}
-                className='form-control'
-                type='text'
-                placeholder='Количество участников'
-              />
-              {errors.maxParticipants && (
+                className='form-control' type='text'
+                placeholder='Количество участников' />
+              {errors.maxParticipants?.type === 'required' && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
+                </div>
+              )}
+              {errors.maxParticipants?.type === 'pattern' && (
+                <div className='invalid-feedback d-block'>
+                  Введите правильное значение
                 </div>
               )}
             </Card>
@@ -185,9 +236,7 @@ const EventEdit = ({ event, closeModal }) => {
           </div>
           <input
             className='btn btn-light my-3 me-auto me-3'
-            onClick={() => {
-              handleSubmit();
-            }}
+            onClick={() => { handleSubmit(); }}
             style={{ width: '150px' }}
             type='submit'
             value={'Сохранить'}
@@ -201,17 +250,13 @@ const EventEdit = ({ event, closeModal }) => {
             type={'button'}
             value={'Отменить'}
           />
-          {!isAddingEvent && (
-            <input
-              className='btn btn-danger my-3 me-auto me-3'
-              onClick={() => {
-                deleteEvent();
-              }}
-              style={{ width: '150px' }}
-              type={'button'}
-              value={'Удалить'}
-            />
-          )}
+          <input
+            className='btn btn-danger my-3 me-auto me-3'
+            onClick={() => { handleConfirmOpen(); }}
+            style={{ width: '150px' }}
+            type={'button'}
+            value={'Удалить'}
+          />
         </div>
       </form>
     </>

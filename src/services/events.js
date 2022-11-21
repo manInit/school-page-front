@@ -26,6 +26,11 @@ export async function createEvent(event) {
   return data;
 }
 
+export async function deleteEvent(event) {
+  const { data } = await axios.delete('/api/activities/' + event.id);
+  return data;
+}
+
 /**
  * Update activity
  * @param {number} event.id Id of update event
@@ -83,7 +88,3 @@ export async function registerOnActivity(schoolchildId, activityId) {
   return data;
 }
 
-export async function deleteEvent(eventId) {
-  const { data } = await axios.delete(`/api/activities/${eventId}`);
-  return data;
-}
