@@ -59,8 +59,7 @@ class EventsStore {
   }
 
   async registerStudent(schoolId, activityId) {
-    const result = await registerOnActivity(schoolId, activityId);
-    console.log(result);
+    await registerOnActivity(schoolId, activityId);
   }
 }
 

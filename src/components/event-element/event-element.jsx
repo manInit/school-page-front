@@ -5,10 +5,11 @@ import './index.scss';
 const EventElement = ({
   event,
   isAdmin,
+  isAuth,
   showModalFunction,
   showEventRegisteredModal,
 }) => {
-  const actionDescription = isAdmin ? 'Подробнее' : 'Подать заявку';
+  const actionDescription = isAdmin || !isAuth ? 'Подробнее' : 'Подать заявку';
   return (
     <div className='event-element mb-4 row'>
       <div className='ms-4 col-2'>

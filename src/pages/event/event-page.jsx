@@ -120,6 +120,7 @@ const EventPage = observer(() => {
               <EventElement
                 key={event.id}
                 event={event}
+                isAuth={isAuth}
                 isAdmin={isAdmin}
                 showModalFunction={showEventInfoModal}
                 showEventRegisteredModal={showEventRegisteredModal}
