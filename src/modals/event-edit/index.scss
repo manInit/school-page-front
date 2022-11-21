@@ -3,3 +3,13 @@
   font-size: 14px !important;
   line-height: 18px !important;
 }
+.dialog-modal-level2{
+  z-index: 1060 !important;
+}
+.dialog-modal-level2-fade{
+  z-index: 1059;
+  background-color: rgba(0,0,0,0.5);
+  position: absolute;
+  width: 100%;
+  height:  100%;
+}
