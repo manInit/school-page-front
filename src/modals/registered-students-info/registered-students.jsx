@@ -20,14 +20,13 @@ const EventInfoRegistered = observer(({ event }) => {
     const fetch = async () => {
       const users = await eventsStore.fetchRegisteredStudent(event.id);
       setAccountsData(users);
+      setToggleActive(users.map((elem) => Boolean(elem.attendActivity)));
     };
     fetch();
   }, []);
 
   const [accountsData, setAccountsData] = useState([]);
-  const [toggleActive, setToggleActive] = useState(
-    accountsData.map((elem) => Boolean(elem.attendActivity))
-  );
+  const [toggleActive, setToggleActive] = useState([]);
   const viewInfoBtn = (elem, key) => (
     <ToggleButton
       key={key}
@@ -71,12 +70,12 @@ const EventInfoRegistered = observer(({ event }) => {
             </tr>
           </thead>
           <tbody>
-            {accountsData.map((elem, i) => (
-              <tr key={i}>
+            {accountsData.map((elem) => (
+              <tr key={id}>
                 <td>{elem.surname}</td>
                 <td>{elem.name}</td>
                 <td>{elem.fatherName}</td>
-                <td>{viewInfoBtn(elem, i)}</td>
+                <td>{viewInfoBtn(elem, elem.id)}</td>
               </tr>
             ))}
           </tbody>
