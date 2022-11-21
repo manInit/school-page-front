@@ -3,14 +3,18 @@ import { registerRequest, loginRequest } from '../services/auth';
 
 class AuthStore {
   isAuth = false;
-  isAdmin = true;
+  isAdmin = false;
   token = '';
+  userId = null;
 
   constructor() {
     const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
     if (token) {
       this.isAuth = true;
       this.token = token;
+      this.isAdmin = role === 'ADMIN';
+      this.userId = Number(localStorage.getItem('user-id'));
     }
     makeAutoObservable(this);
   }
@@ -24,11 +28,8 @@ class AuthStore {
     this.token = '';
     this.isAuth = false;
     localStorage.removeItem('token');
-  }
-
-  loginAsAdmin() {
-    this.isAdmin = true;
-    this.isAuth = true;
+    localStorage.removeItem('role');
+    localStorage.removeItem('user-id');
   }
 
   async login({ username, password }) {
@@ -42,7 +43,12 @@ class AuthStore {
     }
     this.isAuth = true;
     this.token = loginData.token;
+    this.isAdmin = loginData.roles[0].name === 'ADMIN';
+    this.userId = Number(loginData.id);
+
     localStorage.setItem('token', this.token);
+    localStorage.setItem('role', loginData.roles[0].name);
+    localStorage.setItem('user-id', loginData.id);
 
     return this.token;
   }
@@ -57,7 +63,7 @@ class AuthStore {
     phoneNumber,
     email,
   }) {
-    const registerData = await registerRequest({
+    await registerRequest({
       password,
       name,
       secondName,
@@ -67,11 +73,11 @@ class AuthStore {
       phoneNumber,
       email,
     });
-    this.isAuth = true;
-    if (!registerData.token) {
-      // TODO: token or auth??
-    }
-    return this.token;
+
+    await this.login({
+      username: email, 
+      password
+    });
   }
 }
 

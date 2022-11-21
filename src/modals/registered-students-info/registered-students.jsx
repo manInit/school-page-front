@@ -1,23 +1,50 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, Card, Table } from 'react-bootstrap';
+import { Card, Table, ToggleButton } from 'react-bootstrap';
 
 import './index.scss';
 import { observer } from 'mobx-react-lite';
+import { useState } from 'react';
+import eventsStore from '../../store/events';
+import { useEffect } from 'react';
 
 const EventInfoRegistered = observer(({ event }) => {
   const eventData = {
+    id: event.id,
     name: event.name,
     description: event.description,
     date: event.date,
     from_ball: event.participationPoint,
   };
+  useEffect(() => {
+    const fetch = async () => {
+      const users = await eventsStore.fetchRegisteredStudent(event.id);
+      setAccountsData(users);
+    };
+    fetch();
+  }, []);
 
-  const accounts_data = event.users;
-  const viewInfoBtn = (
-    <Button variant='secondary'>
-      <FontAwesomeIcon icon='fa-solid fa-eye' />
-    </Button>
+  const [accountsData, setAccountsData] = useState([]);
+  const [toggleActive, setToggleActive] = useState(
+    accountsData.map((elem) => Boolean(elem.attendActivity))
+  );
+  const viewInfoBtn = (elem, key) => (
+    <ToggleButton
+      key={key}
+      type='checkbox'
+      id={'toggle_checkbox' + key}
+      variant='outline-secondary'
+      checked={toggleActive[key]}
+      onChange={async () => {
+        await eventsStore.checkUsers(elem.id, eventData.id);
+        setToggleActive((arr) => ({ ...arr, [key]: !toggleActive[key] }));
+      }}
+    >
+      <FontAwesomeIcon
+        style={{ width: '2em' }}
+        icon={toggleActive[key] ? 'fa-check' : 'fa-xmark'}
+      />
+    </ToggleButton>
   );
 
   return (
@@ -40,15 +67,16 @@ const EventInfoRegistered = observer(({ event }) => {
               <td>Фамилия</td>
               <td>Имя</td>
               <td>Отчество</td>
+              <td>Присутствие</td>
             </tr>
           </thead>
           <tbody>
-            {accounts_data.map((elem, i) => (
+            {accountsData.map((elem, i) => (
               <tr key={i}>
                 <td>{elem.surname}</td>
                 <td>{elem.name}</td>
-                <td>{elem.patronym}</td>
-                <td>{viewInfoBtn}</td>
+                <td>{elem.fatherName}</td>
+                <td>{viewInfoBtn(elem, i)}</td>
               </tr>
             ))}
           </tbody>

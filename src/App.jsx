@@ -4,7 +4,6 @@ import Header from './components/header/header';
 import AuthPage from './pages/auth/auth-page';
 import EventPage from './pages/event/event-page';
 import RegisterPage from './pages/register/register-page';
-import PrivateRoute from './private-route';
 
 import './scss/index.scss';
 
@@ -16,9 +15,7 @@ function App() {
         <Routes>
           <Route path='/login' element={<AuthPage />} />
           <Route path='/register' element={<RegisterPage />} />
-          <Route exact path='/' element={<PrivateRoute />}>
-            <Route exact path='/' element={<EventPage />} />
-          </Route>
+          <Route exact path='/' element={<EventPage />} />
         </Routes>
       </Router>
     </div>

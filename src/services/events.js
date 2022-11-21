@@ -6,25 +6,8 @@ import axios from './axios-default';
  */
 export async function getAllEvents() {
   const { data } = await axios.get('/api/activities');
-  return data.map((event, index) => ({
+  return data.map((event) => ({
     ...event,
-    users: [
-      {
-        name: 'Имя' + index,
-        surname: 'Фамилия',
-        patronym: 'Отчество',
-      },
-      {
-        name: 'Имя2' + index,
-        surname: 'Фамилия',
-        patronym: 'Отчество',
-      },
-      {
-        name: 'Имя2' + index,
-        surname: 'Фамилия',
-        patronym: 'Отчество',
-      },
-    ],
   }));
 }
 /**
@@ -49,7 +32,7 @@ export async function deleteEvent(event) {
 }
 
 /**
- * update activity
+ * Update activity
  * @param {number} event.id Id of update event
  * @param {string} event.name Name of event
  * @param {string} event.description Description of event
@@ -67,14 +50,41 @@ export async function updateInfoEvent(event) {
 
 /**
  * Mark the presence schooler on activity
- * @param {number} shcoolchildId Id of schoolchild
+ * @param {number} schoolchildId Id of schoolchild
  * @param {number} activityId Id of event
  * @return {Object} Empty object
  */
-export async function appointmentSchoolchildOnEvent(shcoolchildId, activityId) {
+export async function appointmentSchoolchildOnEvent(schoolchildId, activityId) {
   const { data } = await axios.post('/api/activities/appointment', {
-    shcoolchildId,
+    schoolchildId,
     activityId,
   });
   return data;
 }
+
+/**
+ * Get all users registered on event by id event
+ * @param {number} eventId Event id where users get
+ * @returns Array of users registered on event
+ */
+export async function getRegisteredUsersOnEvent(eventId) {
+  const { data } = await axios.get(
+    `/api/schoolchildren/registered?activityId=${eventId}`
+  );
+  return data;
+}
+
+/**
+ * Register schooler on activity
+ * @param {number} schoolchildId Schooler id
+ * @param {number} studyActivityId Event id
+ * @returns Object user and activity
+ */
+export async function registerOnActivity(schoolchildId, activityId) {
+  const { data } = await axios.post('/api/activities/register', {
+    schoolchildId,
+    activityId,
+  });
+  return data;
+}
+

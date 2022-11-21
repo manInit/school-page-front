@@ -8,12 +8,14 @@ import { dateRegExp, positiveIntegerRegExp } from '../../utils/reg-exp';
 import './index.scss';
 
 const EventEdit = ({ event, closeModal }) => {
-  const { register,
+  const {
+    register,
     handleSubmit,
     control,
-    formState: { errors }
+    formState: { errors },
   } = useForm();
-  const { //MDEditor form control
+  const {
+    //MDEditor form control
     field: { onChange, value },
   } = useController({
     name: 'description',
@@ -42,14 +44,13 @@ const EventEdit = ({ event, closeModal }) => {
         eventStore.changeEvent(data);
         closeModal();
       }
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
   };
 
   const deleteEvent = () => {
-    eventStore.deleteEvent(event);
+    eventStore.removeEvent(event.id);
   };
   return (
     <>
@@ -89,11 +90,13 @@ const EventEdit = ({ event, closeModal }) => {
             <input
               {...register('name', {
                 required: true,
-                value: event?.name
+                value: event?.name,
               })}
-              className='form-control brick' type='text'
+              className='form-control brick'
+              type='text'
               style={{ fontSize: '1.8em' }}
-              placeholder='Название' />
+              placeholder='Название'
+            />
             {errors.name && (
               <div className='ms-2 invalid-feedback d-block'>
                 Название мероприятия не должно быть пустым
@@ -102,10 +105,7 @@ const EventEdit = ({ event, closeModal }) => {
           </div>
           <div className='mt-3'>
             Описание:
-            <MDEditor
-              value={value}
-              onChange={onChange}
-            />
+            <MDEditor value={value} onChange={onChange} />
             {errors.description && (
               <div className='ms-2 invalid-feedback d-block'>
                 Описание мероприятия не должно быть пустым
@@ -221,10 +221,12 @@ const EventEdit = ({ event, closeModal }) => {
               <input
                 {...register('activityType', {
                   required: true,
-                  value: event?.activityType
+                  value: event?.activityType,
                 })}
-                className='form-control' type='text'
-                placeholder='Тип мероприятия' />
+                className='form-control'
+                type='text'
+                placeholder='Тип мероприятия'
+              />
               {errors.activityType && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
@@ -234,14 +236,16 @@ const EventEdit = ({ event, closeModal }) => {
           </div>
           <input
             className='btn btn-light my-3 me-auto me-3'
-            onClick={() => { handleSubmit(); console.log(errors); }}
+            onClick={() => { handleSubmit(); }}
             style={{ width: '150px' }}
             type='submit'
             value={'Сохранить'}
           />
           <input
             className='btn btn-light my-3 me-auto me-3'
-            onClick={() => { closeModal(); }}
+            onClick={() => {
+              closeModal();
+            }}
             style={{ width: '150px' }}
             type={'button'}
             value={'Отменить'}
