@@ -71,7 +71,7 @@ const EventInfoRegistered = observer(({ event }) => {
           </thead>
           <tbody>
             {accountsData.map((elem) => (
-              <tr key={id}>
+              <tr key={elem.id}>
                 <td>{elem.surname}</td>
                 <td>{elem.name}</td>
                 <td>{elem.fatherName}</td>
