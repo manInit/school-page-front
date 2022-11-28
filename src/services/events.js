@@ -26,8 +26,8 @@ export async function createEvent(event) {
   return data;
 }
 
-export async function deleteEvent(event) {
-  const { data } = await axios.delete('/api/activities/' + event.id);
+export async function deleteEvent(id) {
+  const { data } = await axios.delete('/api/activities/' + id);
   return data;
 }
 

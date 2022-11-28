@@ -1,18 +1,16 @@
-import { React, useEffect, useState } from 'react';
+import { React, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Modal from 'react-bootstrap/Modal';
-import EventElement from '../../components/event-element/event-element';
 import EventEdit from '../../modals/event-edit/EventEdit';
 import EventInfoRegistered from '../../modals/registered-students-info/registered-students';
 import EventInfo from '../../modals/event-info/event-info';
 import SearchBar from '../../components/search-bar/search-bar';
-import eventStore from '../../store/events';
 import authStore from '../../store/auth';
-import { observer } from 'mobx-react-lite';
 
 import './index.scss';
+import EventList from './event-list';
 
-const EventPage = observer(() => {
+const EventPage = () => {
   const [isModalActive, setModalActive] = useState(false);
   const [modalContent, setModalContent] = useState(null);
   const [modalOptions, setModalOptions] = useState({
@@ -52,19 +50,6 @@ const EventPage = observer(() => {
   const handleClose = () => {
     setModalActive(false);
   };
-  
-  const [searchResults, setSearchResults] = useState([]);
-  const events = eventStore.events;
-
-  useEffect(() => {
-    const fetch = async () => {
-      const events = await eventStore.fetchEvents();
-      setSearchResults(events);
-    };
-    fetch();
-  }, []);
-
-  
   return (
     <>
       <Modal
@@ -99,11 +84,7 @@ const EventPage = observer(() => {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-          <SearchBar
-            elem={events}
-            setSearchResults={setSearchResults}
-            type={'name'}
-          />
+          <SearchBar />
           {isAdmin && (
             <div
               className='btn btn-light'
@@ -114,23 +95,15 @@ const EventPage = observer(() => {
             </div>
           )}
         </div>
-        <div className='event-page-content container-fluid mt-3'>
-          {searchResults.map((event) => {
-            return (
-              <EventElement
-                key={event.id}
-                event={event}
-                isAuth={isAuth}
-                isAdmin={isAdmin}
-                showModalFunction={showEventInfoModal}
-                showEventRegisteredModal={showEventRegisteredModal}
-              ></EventElement>
-            );
-          })}
-        </div>
+        <EventList
+          isAuth={isAuth}
+          isAdmin={isAdmin}
+          showEventInfoModal={showEventInfoModal}
+          showEventRegisteredModal={showEventRegisteredModal}
+        />
       </div>
     </>
   );
-});
+};
 
 export default EventPage;

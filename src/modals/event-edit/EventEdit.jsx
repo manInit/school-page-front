@@ -37,13 +37,11 @@ const EventEdit = ({ event, closeModal }) => {
     try {
       if (isAddingEvent) {
         eventStore.createEvent(data);
-        closeModal();
-      }
-      else {
+      } else {
         data.id = event.id;
         eventStore.changeEvent(data);
-        closeModal();
       }
+      closeModal();
     } catch (err) {
       console.log(err);
     }
@@ -54,36 +52,43 @@ const EventEdit = ({ event, closeModal }) => {
   };
   return (
     <>
-      <div className='dialog-modal-level2-fade' style={{ display: showConfirmModal ? 'block' : 'none' }}>
-      </div>
+      <div
+        className='dialog-modal-level2-fade'
+        style={{ display: showConfirmModal ? 'block' : 'none' }}
+      ></div>
       <Modal
         className='dialog-modal-level2'
         show={showConfirmModal}
         size={'sm'}
         backdrop={false}
         onHide={handleConfirmClose}
-        centered>
-        <div className='text-center mt-3 mb-3'>
-          Подтвердите действие
-        </div>
+        centered
+      >
+        <div className='text-center mt-3 mb-3'>Подтвердите действие</div>
         <div className='d-flex'>
           <input
             className='btn btn-danger my-3 ms-3 me-3'
-            onClick={() => { deleteEvent(); }}
+            onClick={() => {
+              deleteEvent();
+            }}
             style={{ width: '150px' }}
             type={'button'}
             value={'Удалить'}
           />
           <input
             className='btn btn-light my-3 ms-3 me-3'
-            onClick={() => { handleConfirmClose(); }}
+            onClick={() => {
+              handleConfirmClose();
+            }}
             style={{ width: '150px' }}
             type={'button'}
             value={'Отмена'}
           />
         </div>
       </Modal>
-      <h2 className='text-center'>{isAddingEvent ? 'Создание мероприятия' : 'Редактирование мероприятия'}</h2>
+      <h2 className='text-center'>
+        {isAddingEvent ? 'Создание мероприятия' : 'Редактирование мероприятия'}
+      </h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div style={{ width: '80%', marginLeft: '10%' }}>
           <div>
@@ -126,10 +131,12 @@ const EventEdit = ({ event, closeModal }) => {
                 {...register('startDate', {
                   required: true,
                   value: event?.startDate,
-                  pattern: dateRegExp
+                  pattern: dateRegExp,
                 })}
-                className='form-control' type='text'
-                placeholder='Дата начала' />
+                className='form-control'
+                type='text'
+                placeholder='Дата начала'
+              />
               {errors.startDate?.type === 'required' && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
@@ -148,10 +155,12 @@ const EventEdit = ({ event, closeModal }) => {
                 {...register('endDate', {
                   required: true,
                   value: event?.endDate,
-                  pattern: dateRegExp
+                  pattern: dateRegExp,
                 })}
-                className='form-control' type='text'
-                placeholder='Дата завершения' />
+                className='form-control'
+                type='text'
+                placeholder='Дата завершения'
+              />
               {errors.endDate?.type === 'required' && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
@@ -170,10 +179,12 @@ const EventEdit = ({ event, closeModal }) => {
                 {...register('participationPoint', {
                   required: true,
                   value: event?.participationPoint,
-                  pattern: positiveIntegerRegExp
+                  pattern: positiveIntegerRegExp,
                 })}
-                className='form-control' type='text'
-                placeholder='Баллы' />
+                className='form-control'
+                type='number'
+                placeholder='Баллы'
+              />
               {errors.participationPoint?.type === 'required' && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
@@ -200,10 +211,12 @@ const EventEdit = ({ event, closeModal }) => {
                 {...register('maxParticipants', {
                   required: true,
                   value: event?.maxParticipants,
-                  pattern: positiveIntegerRegExp
+                  pattern: positiveIntegerRegExp,
                 })}
-                className='form-control' type='text'
-                placeholder='Количество участников' />
+                className='form-control'
+                type='number'
+                placeholder='Количество участников'
+              />
               {errors.maxParticipants?.type === 'required' && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
@@ -236,7 +249,9 @@ const EventEdit = ({ event, closeModal }) => {
           </div>
           <input
             className='btn btn-light my-3 me-auto me-3'
-            onClick={() => { handleSubmit(); }}
+            onClick={() => {
+              handleSubmit();
+            }}
             style={{ width: '150px' }}
             type='submit'
             value={'Сохранить'}
@@ -250,13 +265,17 @@ const EventEdit = ({ event, closeModal }) => {
             type={'button'}
             value={'Отменить'}
           />
-          <input
-            className='btn btn-danger my-3 me-auto me-3'
-            onClick={() => { handleConfirmOpen(); }}
-            style={{ width: '150px' }}
-            type={'button'}
-            value={'Удалить'}
-          />
+          {!isAddingEvent && (
+            <input
+              className='btn btn-danger my-3 me-auto me-3'
+              onClick={() => {
+                handleConfirmOpen();
+              }}
+              style={{ width: '150px' }}
+              type={'button'}
+              value={'Удалить'}
+            />
+          )}
         </div>
       </form>
     </>

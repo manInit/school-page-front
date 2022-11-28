@@ -1,33 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { useState } from 'react';
+import eventStore from '../../store/events';
 import './search-bar.scss';
 
-const SearchBar = ({ elem, setSearchResults, type }) => {
-  const [search, setSearch] = useState('');
-
-  const condition = (elem, e) => {
-    switch (type) {
-    case 'name':
-      const query = e.target.value.toLowerCase();
-      if (query === '') return true;
-      return (
-        elem.name.toLowerCase().includes(query) ||
-        elem.description.toLowerCase().includes(query) ||
-        elem.startDate.toLowerCase().includes(query)
-      );
-    default:
-      return false;
-    }
-  };
-
+const SearchBar = () => {
   const handleSearchChange = (e) => {
-    setSearch(e.target.value);
-    const resultsArray = elem.filter((elem) => condition(elem, e));
-    setSearchResults(resultsArray);
+    eventStore.searchEvents(e.target.value);
   };
-
-  // setSearchResults(elem);
 
   return (
     <div className='input-group mb-3' style={{ display: 'contents' }}>
@@ -35,7 +14,6 @@ const SearchBar = ({ elem, setSearchResults, type }) => {
         type='text'
         placeholder=''
         className='form-control'
-        value={search}
         onChange={handleSearchChange}
         defaultValue=''
       />

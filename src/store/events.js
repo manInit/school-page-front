@@ -8,10 +8,13 @@ import {
   registerOnActivity,
   deleteEvent,
 } from '../services/events';
+import { isSearchEvent } from '../utils/searchEvents';
 import authStore from './auth';
 
 class EventsStore {
   events = [];
+  filteredEvents = null;
+  query = '';
 
   constructor() {
     makeAutoObservable(this);
@@ -28,14 +31,16 @@ class EventsStore {
   async fetchEvents() {
     const events = await getAllEvents();
     this.events = events;
+    if (!this.filteredEvents) {
+      this.filteredEvents = events;
+    }
     return this.events;
   }
 
   async createEvent(event) {
-    const result = await createEvent(event);
-    if (result) {
-      this.events.push(event);
-    }
+    await createEvent(event);
+    this.events = await getAllEvents();
+    await this.searchEvents(this.query);
   }
 
   async checkUsers(userId, eventId) {
@@ -43,19 +48,21 @@ class EventsStore {
     return result;
   }
 
+  async searchEvents(query) {
+    this.query = query;
+    this.filteredEvents = this.events.filter((e) => isSearchEvent(e, query));
+  }
+
   async removeEvent(eventId) {
     await deleteEvent(eventId);
-    this.events = this.events.filter((event) => event.id !== eventId);
+    this.events = await getAllEvents();
+    await this.searchEvents(this.query);
   }
 
   async changeEvent(event) {
-    const result = await updateInfoEvent(event);
-    if (result) {
-      this.events = this.events.map((event) => {
-        if (result.id === event.id) return result;
-        return event;
-      });
-    }
+    await updateInfoEvent(event);
+    this.events = await getAllEvents();
+    await this.searchEvents(this.query);
   }
 
   async registerStudent(schoolId, activityId) {
