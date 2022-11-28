@@ -98,7 +98,7 @@ const EventPage = () => {
         <EventList
           isAuth={isAuth}
           isAdmin={isAdmin}
-          showEventInfoModal={showEventInfoModal}
+          showModalFunction={showEventInfoModal}
           showEventRegisteredModal={showEventRegisteredModal}
         />
       </div>

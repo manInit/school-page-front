@@ -4,11 +4,11 @@ import eventStore from '../../store/events';
 import { observer } from 'mobx-react-lite';
 
 
-const EventList = observer((isAuth, isAdmin, showEventInfoModal, showEventRegisteredModal) => {
+const EventList = observer(({isAuth, isAdmin, showModalFunction, showEventRegisteredModal}) => {
   useEffect(() => {
     eventStore.fetchEvents();
   }, []);
-
+  
   const events = eventStore.filteredEvents ?? [];
   return (
     <>
@@ -20,7 +20,7 @@ const EventList = observer((isAuth, isAdmin, showEventInfoModal, showEventRegist
               event={event}
               isAuth={isAuth}
               isAdmin={isAdmin}
-              showModalFunction={showEventInfoModal}
+              showModalFunction={showModalFunction}
               showEventRegisteredModal={showEventRegisteredModal}
             ></EventElement>
           );
