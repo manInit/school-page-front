@@ -3,7 +3,7 @@ import { Card, Modal } from 'react-bootstrap';
 import eventStore from '../../store/events';
 import { useForm, useController } from 'react-hook-form';
 import MDEditor from '@uiw/react-md-editor';
-import { dateRegExp, positiveIntegerRegExp } from '../../utils/reg-exp';
+import { positiveIntegerRegExp } from '../../utils/reg-exp';
 
 import './index.scss';
 
@@ -23,6 +23,12 @@ const EventEdit = ({ event, closeModal }) => {
     rules: { required: true },
     defaultValue: event?.description,
   });
+
+  //TODO:
+  //right date integration------------------------------------------------------------------------------
+  const startDate = isNaN(new Date(event?.startDate).getTime()) ? new Date() : new Date(event?.startDate);
+  const endDate = isNaN(new Date(event?.endDate).getTime()) ? new Date() : new Date(event?.endDate);
+
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const handleConfirmOpen = () => {
@@ -48,7 +54,6 @@ const EventEdit = ({ event, closeModal }) => {
       console.log(err);
     }
   };
-
   const deleteEvent = () => {
     eventStore.removeEvent(event.id);
   };
@@ -125,19 +130,14 @@ const EventEdit = ({ event, closeModal }) => {
               <input
                 {...register('startDate', {
                   required: true,
-                  value: event?.startDate,
-                  pattern: dateRegExp
+                  value: startDate.toISOString().substring(0, 10),
                 })}
-                className='form-control' type='text'
+
+                className='form-control' type='date'
                 placeholder='Дата начала' />
               {errors.startDate?.type === 'required' && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
-                </div>
-              )}
-              {errors.startDate?.type === 'pattern' && (
-                <div className='invalid-feedback d-block'>
-                  Введите дату в формате ДД-ММ-ГГГГ
                 </div>
               )}
             </Card>
@@ -147,19 +147,13 @@ const EventEdit = ({ event, closeModal }) => {
               <input
                 {...register('endDate', {
                   required: true,
-                  value: event?.endDate,
-                  pattern: dateRegExp
+                  value: endDate.toISOString().substring(0, 10),
                 })}
-                className='form-control' type='text'
+                className='form-control' type='date'
                 placeholder='Дата завершения' />
               {errors.endDate?.type === 'required' && (
                 <div className='invalid-feedback d-block'>
                   Поле не должно быть пустым
-                </div>
-              )}
-              {errors.endDate?.type === 'pattern' && (
-                <div className='invalid-feedback d-block'>
-                  Введите дату в формате ДД-ММ-ГГГГ
                 </div>
               )}
             </Card>
@@ -172,7 +166,7 @@ const EventEdit = ({ event, closeModal }) => {
                   value: event?.participationPoint,
                   pattern: positiveIntegerRegExp
                 })}
-                className='form-control' type='text'
+                className='form-control' type='number'
                 placeholder='Баллы' />
               {errors.participationPoint?.type === 'required' && (
                 <div className='invalid-feedback d-block'>
@@ -202,7 +196,7 @@ const EventEdit = ({ event, closeModal }) => {
                   value: event?.maxParticipants,
                   pattern: positiveIntegerRegExp
                 })}
-                className='form-control' type='text'
+                className='form-control' type='number'
                 placeholder='Количество участников' />
               {errors.maxParticipants?.type === 'required' && (
                 <div className='invalid-feedback d-block'>
