@@ -70,6 +70,8 @@ const EventEdit = ({ event, closeModal }) => {
             className='btn btn-danger my-3 ms-3 me-3'
             onClick={() => {
               deleteEvent();
+              setShowConfirmModal(false);
+              closeModal();
             }}
             style={{ width: '150px' }}
             type={'button'}
