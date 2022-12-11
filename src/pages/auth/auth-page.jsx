@@ -20,6 +20,7 @@ const AuthPage = () => {
     try {
       await authStore.login(data);
     } catch (e) {
+      console.log(e)
       setShowToast(true);
       return;
     }
