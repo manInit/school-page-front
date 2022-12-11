@@ -46,7 +46,7 @@ class AuthStore {
     this.isAdmin = loginData.password === 'admin';
     this.userId = Number(loginData.id);
 
-    localStorage.setItem('to  ken', this.token);
+    localStorage.setItem('token', this.token);
     localStorage.setItem('role', loginData.password === 'admin' ? 'ADMIN' : 'USER');
     localStorage.setItem('user-id', loginData.id);
 
